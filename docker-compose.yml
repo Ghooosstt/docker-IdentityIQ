@@ -1,0 +1,30 @@
+services:
+
+  mysql:
+    image: mysql
+    container_name: iiq-mysql
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+    cap_add:
+      - SYS_NICE  # CAP_SYS_NICE
+    networks:
+      - custom-network
+
+  tomcat:
+    build:
+      context: .
+      args:
+        IIQ_VERSION: 8.2
+      dockerfile: ./docker/tomcat/Dockerfile
+    container_name: iiq-tomcat
+    depends_on:
+      - mysql
+    ports:
+      - "8080:8080"
+    networks:
+      - custom-network
+
+networks:
+  custom-network:
