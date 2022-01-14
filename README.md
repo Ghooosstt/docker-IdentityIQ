@@ -1,7 +1,7 @@
 # Docker-IdentityIQ
 Deploy an IdentityIQ instance using Docker.
 
-This project use docker-compose to deploy an MySQL container and an Apache Tomcat container.
+This project use docker-compose to deploy a MySQL container and an Apache Tomcat container.
 
 ## Requirements
 
@@ -19,6 +19,8 @@ At the first launch, the iiq-tomcat container will install mariadb client to com
   
 After that, the iiq-tomcat container will launch tomcat server after each start.
 
+The IdentityIQ server is available at [http://localhost:8080/identityiq](http://localhost:8080/identityiq).
+
 ## Usage
 
 To stop the containers, use the command `docker-compose stop`.
@@ -28,3 +30,7 @@ To start the containers, use the command `docker-compose start`.
 To remove the containers, use the command `docker-compose down`.
 
 To recreate the containers, use the command `docker-compose up`.
+
+## Update version
+
+If you want to change the IdentityIQ version, you must edit the **docker-compose.yml** file with the new version, remove the current containers using `docker-compose down`, then rebuild the docker-identityiq_tomcat image and recreate the containers using `docker-compose up`.
