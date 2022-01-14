@@ -17,6 +17,8 @@ services:
       context: .
       args:
         IIQ_VERSION: 8.2
+        #IIQ_PATCH: p1
+        IIQ_PATCH: # no patch
       dockerfile: ./docker/tomcat/Dockerfile
     container_name: iiq-tomcat
     depends_on:
