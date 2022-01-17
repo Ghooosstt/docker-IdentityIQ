@@ -22,7 +22,7 @@ if [ ! -e $CONTAINER_ALREADY_STARTED ]; then
     mysql --user=root --password=root -h iiq-mysql < create_identityiq_tables-$IIQ_VERSION.mysql
 
     # Patch the database if the IIQ_PATCH variable environment is set
-    [ ! -z "$IIQ_PATCH" ] && echo Patch $IIQ_VERSION$IIQ_PATCH detected, patching IIQ database ... && mysql --user=root --password=root -h iiq-mysql < upgrade_identityiq_tables-$IIQ_VERSION$IIQ_PATCH.mysql
+    if [ ! -z "$IIQ_PATCH" ]; then echo Patch $IIQ_VERSION$IIQ_PATCH detected, patching IIQ database ... && mysql --user=root --password=root -h iiq-mysql < upgrade_identityiq_tables-$IIQ_VERSION$IIQ_PATCH.mysql; fi
 
     # Launch iiq console and import init files
     cd /usr/local/tomcat/webapps/identityiq/WEB-INF/bin
@@ -31,7 +31,7 @@ if [ ! -e $CONTAINER_ALREADY_STARTED ]; then
     echo "import init-lcm.xml" | ./iiq console
 
     # Launch iiq patch command if the IIQ_PATCH variable environment is set
-    [ ! -z "$IIQ_PATCH" ] && ./iiq patch $IIQ_VERSION$IIQ_PATCH
+    if [ ! -z "$IIQ_PATCH" ]; then ./iiq patch $IIQ_VERSION$IIQ_PATCH; fi
 
     # Start tomcat
     catalina.sh run
