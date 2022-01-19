@@ -57,3 +57,12 @@ To recreate the containers, use the command `docker-compose up`.
 If you want to change the IdentityIQ version or change the patch version, you must edit the **.env** file with the new version, remove the current containers using `docker-compose down`, remove the image **docker-identityiq_tomcat** using `docker image rm docker-identityiq_tomcat`, clean the old volumes using `docker volume prune` then rebuild the iiq-tomcat image and recreate the containers using `docker-compose up`.
 
 **BE CAREFUL, this action will delete your containers and all the data they contain.**
+
+# Ressources
+
+* [tomcat](https://hub.docker.com/_/tomcat)
+* [mysql](https://hub.docker.com/_/mysql)
+* [phpmyadmin](https://hub.docker.com/_/phpmyadmin)
+* [osixia/openldap](https://github.com/osixia/docker-openldap)
+* [osixia/phpldapadmin](https://github.com/osixia/docker-phpLDAPadmin)
+* [marcopas/docker-mailslurper](https://hub.docker.com/r/marcopas/docker-mailslurper)
