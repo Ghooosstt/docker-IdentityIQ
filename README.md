@@ -1,5 +1,5 @@
 # Docker-IdentityIQ
-Deploy an IdentityIQ instance using Docker. This project use docker-compose to deploy:
+Deploy a SailPoint IdentityIQ instance using Docker. This project use docker-compose to deploy:
 * An Apache Tomcat container with IdentityIQ.
 * A MySQL container.
 * A phpMyAdmin container.
