@@ -13,8 +13,14 @@ if [ ! -e $CONTAINER_ALREADY_STARTED ]; then
     apt-get install -y mariadb-server
     service mariadb start
 
-    # Change IIQ config file
+    # Install Vim
+    apt-get install -y vim
+
+    # Update IIQ database config file
     sed -i 's/localhost/iiq-mysql/g' /usr/local/tomcat/webapps/identityiq/WEB-INF/classes/iiq.properties
+
+    # Update init file with mailslurper smtp server
+    sed -i 's/mail.example.com/iiq-mailslurper/g' /usr/local/tomcat/webapps/identityiq/WEB-INF/config/init.xml
 
     # Connect to mysql server and initiate DB
     cd /usr/local/tomcat/webapps/identityiq/WEB-INF/database

@@ -1,7 +1,8 @@
 services:
 
+  # MySQL
   mysql:
-    image: mysql
+    image: mysql:8.0
     container_name: iiq-mysql
     ports:
       - "3306:3306"
@@ -12,19 +13,75 @@ services:
     networks:
       - custom-network
 
+  # Tomcat + IIQ
   tomcat:
     build:
       context: .
       args:
-        IIQ_VERSION: 8.2
-        #IIQ_PATCH: p1
-        IIQ_PATCH: # no patch
+        IIQ_VERSION: ${IIQ_VERSION}
+        IIQ_PATCH: ${IIQ_PATCH}
       dockerfile: ./docker/tomcat/Dockerfile
     container_name: iiq-tomcat
     depends_on:
       - mysql
     ports:
       - "8080:8080"
+    networks:
+      - custom-network
+  
+  # OpenLDAP
+  openldap:
+    image: osixia/openldap:1.5.0
+    container_name: iiq-openldap
+    ports:
+      - "389:389"
+      - "636:636"
+    environment:
+      - LDAP_ORGANISATION=My Company
+      - LDAP_DOMAIN=my-company.com
+      - LDAP_ADMIN_PASSWORD=root
+    volumes:
+      - ./openldap:/container/service/slapd/assets/config/bootstrap/ldif/custom
+    command: --copy-service
+    networks:
+      - custom-network
+
+  # LDAP Administration
+  ldapadmin:
+    image: osixia/phpldapadmin:0.9.0
+    container_name: iiq-ldapadmin
+    ports:
+      - "6443:443"
+    depends_on:
+      - openldap
+    environment:
+      - PHPLDAPADMIN_LDAP_HOSTS=iiq-openldap
+    networks:
+      - custom-network
+  
+  # MySQL Administration
+  mysqladmin:
+    image: phpmyadmin:5.1.1
+    container_name: iiq-mysqladmin
+    ports:
+      - "8070:80"
+    environment:
+      - PMA_HOST=iiq-mysql
+    depends_on:
+      - mysql
+    networks:
+      - custom-network
+  
+  # SMTP Server
+  mailslurper:
+    image: marcopas/docker-mailslurper
+    container_name: iiq-mailslurper
+    ports:
+      - "25:25"
+      - "8090:8090"
+      - "8085:8085"
+    volumes:
+      - ./mailslurper/config.json:/opt/mailslurper/config.json
     networks:
       - custom-network
 
