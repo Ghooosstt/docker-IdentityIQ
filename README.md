@@ -27,18 +27,18 @@ After that, the iiq-tomcat container will launch tomcat server after each start.
 
 ## Informations
 
-The IdentityIQ server is available at [http://localhost:8080/identityiq](http://localhost:8080/identityiq).
-* Admin user : spadmin
-* Admin password : admin
+The IdentityIQ server is available at [http://localhost:8080/identityiq/](http://localhost:8080/identityiq/).
+* Admin user: spadmin
+* Admin password: admin
 
 The MySQL server listens on port 3306 and is accessible through the phpMyAdmin container at [http://localhost:8070](http://localhost:8070).
-* Admin user : root
-* Admin password : root
+* Admin user: root
+* Admin password: root
 
 The OpenLDAP server listens on port 389 and is accessible through the phpLDAPadmin container at [https://localhost:6443](https://localhost:6443).
-* LDAP domain : my-company.com
-* Admin user : cn=admin,dc=my-company,dc=com
-* Admin password : root
+* LDAP domain: my-company.com
+* Admin user: cn=admin,dc=my-company,dc=com
+* Admin password: root
 
 The MailSlurper server listens on port 25 and the emails are visible at [http://localhost:8090](http://localhost:8090).
 
