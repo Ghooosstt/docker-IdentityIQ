@@ -17,6 +17,7 @@ COPY identityiq-${IIQ_VERSION}${IIQ_PATCH}.ja* .
 RUN if [ ! -z "$IIQ_PATCH" ]; then unzip -o identityiq-${IIQ_VERSION}${IIQ_PATCH}.jar -d /usr/local/tomcat/webapps/identityiq; fi
 
 # Copy container startup script
+WORKDIR /usr/local/tomcat/
 COPY entrypoint.sh .
 RUN chmod +x entrypoint.sh
 ENTRYPOINT [ "./entrypoint.sh" ]

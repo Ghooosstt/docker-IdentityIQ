@@ -48,6 +48,12 @@ To stop the containers, use the command `docker-compose stop`.
 
 To start the containers, use the command `docker-compose start`.
 
+To see logs from containers after start, use the command `docker-compose logs --follow`.
+
+To list all the containers, use the command `docker ps -a`.
+
+To execute bash inside a container, use the command `docker exec -it <container_name> bash`.
+
 To remove the containers, use the command `docker-compose down`. *(Warning, this action deletes data from your containers)*.
 
 To recreate the containers, use the command `docker-compose up`.
@@ -56,7 +62,7 @@ To recreate the containers, use the command `docker-compose up`.
 
 If you want to change the IdentityIQ version or change the patch version, you must edit the **.env** file with the new version, remove the current containers using `docker-compose down`, remove the image **docker-identityiq_tomcat** using `docker image rm docker-identityiq_tomcat`, clean the old volumes using `docker volume prune` then rebuild the iiq-tomcat image and recreate the containers using `docker-compose up`.
 
-**BE CAREFUL, this action will delete your containers and all the data they contain.**
+**WARNING, this action will delete your containers and all the data they contain.**
 
 # Ressources
 
