@@ -17,9 +17,10 @@ To use this project, you have to download and install [Docker](https://www.docke
 
 1. Before running any commands, you have to deposite your IdentityIQ zip archive in the root of the directory project. Then you have to edit the **.env** file and update the **IIQ_VERSION** variable by the version you are using *(Exemple: 8.2 for identityiq-8.2.zip)*. You can also specify a patch with **IIQ_PATCH** *(Exemple: p1 for identityiq-8.2p1.jar, nothing for no patch)*.
 
-1. Then, verify that the file **entrypoint.sh** is in UNIX format (end line with LF). You can verify and change it if necessary with Notepad++. <img src="https://user-images.githubusercontent.com/23320254/150384352-9d832bef-43e5-487f-a01b-82dfca072036.png" width="400" height="250" />
+2. Then, verify that the file **entrypoint.sh** is in UNIX format (end line with LF). You can verify and change it if necessary with Notepad++.
+* <img src="https://user-images.githubusercontent.com/23320254/150384352-9d832bef-43e5-487f-a01b-82dfca072036.png" width="550" height="300" />
 
-1. Finally, go to the root of the directory and run `docker-compose up`. This command will build the **docker-identityiq_tomcat** image and create all the containers.
+3. Finally, go to the root of the directory and run `docker-compose up`. This command will build the **docker-identityiq_tomcat** image and create all the containers.
 
 At the first launch, the iiq-tomcat container will install mariadb client to communicate with the mysql container, and run the *create_identityiq_tables-\<version\>.sql* script. Then it will run the iiq console, import init files, patch the database if a patch is provided, and start the tomcat server.
 
