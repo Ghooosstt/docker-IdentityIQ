@@ -46,6 +46,8 @@ services:
       - LDAP_ADMIN_PASSWORD=root
     volumes:
       - ./openldap:/container/service/slapd/assets/config/bootstrap/ldif/custom
+      - iiq-openldap:/var/lib/ldap
+      - iiq-openldapconfig:/etc/ldap/slapd.d
     command: --copy-service
     networks:
       - custom-network
@@ -95,6 +97,10 @@ volumes:
   iiq-db:
     driver: local
   iiq-tomcat:
+    driver: local
+  iiq-openldap:
+    driver: local
+  iiq-openldapconfig:
     driver: local
   iiq-ldapadmin:
     driver: local
