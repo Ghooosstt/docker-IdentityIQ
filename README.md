@@ -57,7 +57,7 @@ To list all the containers, use the command `docker ps -a`.
 
 To execute bash inside a container, use the command `docker exec -it <container_name> bash`.
 
-To remove the containers, use the command `docker-compose down`. *(Warning, this action deletes data from your containers)*.
+To remove the containers, use the command `docker-compose down`.
 
 To recreate the containers, use the command `docker-compose up`.
 

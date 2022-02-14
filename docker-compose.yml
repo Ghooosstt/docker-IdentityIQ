@@ -12,6 +12,8 @@ services:
       - SYS_NICE  # CAP_SYS_NICE
     networks:
       - custom-network
+    volumes:
+      - iiq-db:/var/lib/mysql
 
   # Tomcat + IIQ
   tomcat:
@@ -28,6 +30,8 @@ services:
       - "8080:8080"
     networks:
       - custom-network
+    volumes:
+      - iiq-tomcat:/usr/local/tomcat
   
   # OpenLDAP
   openldap:
@@ -58,6 +62,8 @@ services:
       - PHPLDAPADMIN_LDAP_HOSTS=iiq-openldap
     networks:
       - custom-network
+    volumes:
+      - iiq-ldapadmin:/var/www/phpldapadmin
   
   # MySQL Administration
   mysqladmin:
@@ -85,5 +91,14 @@ services:
     networks:
       - custom-network
 
+volumes:
+  iiq-db:
+    driver: local
+  iiq-tomcat:
+    driver: local
+  iiq-ldapadmin:
+    driver: local
+
 networks:
   custom-network:
+      driver: bridge
