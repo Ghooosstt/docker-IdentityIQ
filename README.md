@@ -61,6 +61,12 @@ To remove the containers, use the command `docker-compose down`.
 
 To recreate the containers, use the command `docker-compose up`.
 
+## Backup volumes data
+
+If you need to send your containers data to another host, or if you want to backup your volumes data. You can use the script `volumes_backup.bat` for Windows and `volumes_backup.sh` for Linux.
+
+These scripts will generate a tarball of MySQL and OpenLDAP containers data.
+
 ## Update version
 
 If you want to change the IdentityIQ version or change the patch version, you must edit the **.env** file with the new version, remove the current containers using `docker-compose down`, remove the image **docker-identityiq_tomcat** using `docker image rm docker-identityiq_tomcat`, clean the old volumes using `docker volume prune` then rebuild the iiq-tomcat image and recreate the containers using `docker-compose up`.
