@@ -20,4 +20,4 @@ docker run --rm --volumes-from iiq-mysql -v "%cd%":/backup ubuntu tar cvf /backu
 docker run --rm --volumes-from iiq-openldap -v "%cd%":/backup ubuntu tar cvf /backup/backup-openldap.tar /var/lib/ldap
 docker run --rm --volumes-from iiq-openldap -v "%cd%":/backup ubuntu tar cvf /backup/backup-openldapconfig.tar /etc/ldap/slapd.d
 
-ECHO Backup completed successfully!
+echo Backup completed successfully!
