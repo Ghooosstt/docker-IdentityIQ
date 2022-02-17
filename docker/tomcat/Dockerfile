@@ -11,8 +11,10 @@ WORKDIR /work
 COPY identityiq-${IIQ_VERSION}.zi* .
 COPY identityiq.wa* .
 
-# If IIQ_CUSTOM_WAR is NOT set to yes remove custom identityiq.war file if present and unzip identityiq-<version>.zip to get default war file.
+# If IIQ_CUSTOM_WAR is NOT set to yes, remove custom identityiq.war if the file is present and unzip identityiq-<version>.zip to get default war file.
 RUN if [ "$IIQ_CUSTOM_WAR" != "yes" ]; then rm -f identityiq.war && unzip identityiq-${IIQ_VERSION}.zip; fi
+# If IIQ_CUSTOM_WAR is set to yes, remove identityiq.zip file and patch.jar if they are present in order to reduce the image size.
+RUN if [ "$IIQ_CUSTOM_WAR" = "yes" ]; then rm -f identityiq-${IIQ_VERSION}.zip && rm -f identityiq-${IIQ_VERSION}${IIQ_PATCH}.jar; fi
 
 # Unzip war file
 RUN mv identityiq.war /usr/local/tomcat/webapps/
