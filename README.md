@@ -17,13 +17,16 @@ To use this project, you must:
 
 ## Setup
 
-1. Drop your IdentityIQ zip archive *(and .jar file for patch)* in the root of this directory.
+1. Drop your **identityiq-\<version\>.zip** file, and your **identityiq\<version\>\<patch\>.jar** file in the root of this directory. *You can also deploy a custom war file by dropping your 'identityiq.war' file.*
 
-2. Edit the **.env** file and update the **IIQ_VERSION** variable by the version you are using *(Exemple: 8.2 for identityiq-8.2.zip)*. You can also specify a patch with **IIQ_PATCH** *(Exemple: p1 for identityiq-8.2p1.jar, nothing for no patch)*.
+2. Edit the **.env** file:
+    1. Update the **IIQ_VERSION** variable by the version you are using *(Exemple: 8.2 for identityiq-8.2.zip)*.
+    1. Specify a patch with **IIQ_PATCH** *(Exemple: p1 for identityiq-8.2p1.jar, nothing for no patch)*.
+    1. Change the **IIQ_CUSTOM_WAR** variable to `yes` if you are deploying a custom war.
 
 3. Go to the root of this directory and run `docker-compose up`. This command will build the **docker-identityiq_tomcat** image and create all the containers.
 
-At the first launch, the iiq-tomcat container will install mariadb client to communicate with the mysql container, and run the *create_identityiq_tables-\<version\>.sql* script. Then it will run the iiq console, import init files, patch the database if a patch is provided, and start the tomcat server.
+At the first launch, the iiq-tomcat container will install mariadb client to communicate with the mysql container, and run the *create_identityiq_tables-\<version\>.sql* script. Then it will run the iiq console, import init files, import custom objects if IIQ_CUSTOM_WAR option is set, patch the database if a patch is provided, and start the tomcat server.
 
 ![first-launch](https://user-images.githubusercontent.com/23320254/149496381-6e65d475-3312-4f7b-acbc-33131798ecf9.png)
   

@@ -22,6 +22,7 @@ services:
       args:
         IIQ_VERSION: ${IIQ_VERSION}
         IIQ_PATCH: ${IIQ_PATCH}
+        IIQ_CUSTOM_WAR: ${IIQ_CUSTOM_WAR}
       dockerfile: ./docker/tomcat/Dockerfile
     container_name: iiq-tomcat
     depends_on:
