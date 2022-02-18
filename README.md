@@ -88,7 +88,7 @@ If you want to deploy another custom war, another IdentityIQ version or another 
 2. Remove the current containers using `docker-compose down`.
 3. Clean the old volumes using `docker volume prune`.
 4. Remove the image **docker-identityiq_tomcat** using `docker image rm docker-identityiq_tomcat`.
-5. Rebuild the iiq-tomcat image using `docker-compose build --no-cache`
+5. Rebuild the iiq-tomcat image using `docker-compose build --no-cache`.
 6. Recreate the containers using `docker-compose up`.
 
 **WARNING, this action will delete your containers and all the data they contain.**
