@@ -77,7 +77,7 @@ These scripts will generate a tarball for MySQL and for OpenLDAP containers data
 
 Place the backup tarballs in the root of this directory, and use the `volumes_restore.bat` script for Windows or `volumes_backup.sh` script for Linux.
 
-**The iiq-tomcat container must be in the same version than the MySQL backup.**
+**The iiq-tomcat container must be in the same version as the MySQL backup.**
 
 **Your containers must exist and must be stopped.**
 
