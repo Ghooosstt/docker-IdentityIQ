@@ -41,9 +41,9 @@ if [ ! -e $CONTAINER_ALREADY_STARTED ]; then
     cd /usr/local/tomcat/webapps/identityiq/WEB-INF/bin
     echo import init.xml
     echo "import init.xml" | ./iiq console
-    echo import init-lcm.xml
-    echo "import init-lcm.xml" | ./iiq console
-    if [ "$IIQ_CUSTOM_WAR" = "yes" ]; then echo import sp.init-custom.xml && echo "import sp.init-custom.xml" | ./iiq console; fi
+
+    # In a custom war, init.xml already contains init-lcm.xml and sp.init-custom.xml. If it's not a custom war, we need to import init-lcm.xml.
+    if [ "$IIQ_CUSTOM_WAR" != "yes" ]; then echo import init-lcm.xml && echo "import init-lcm.xml" | ./iiq console; fi
 
     # Launch iiq patch command if the IIQ_PATCH variable environment is set.
     if [ ! -z "$IIQ_PATCH" ]; then ./iiq patch $IIQ_VERSION$IIQ_PATCH; fi
