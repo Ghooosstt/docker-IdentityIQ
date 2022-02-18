@@ -71,15 +71,19 @@ If you need to send your containers data to another host, or if you want to back
 
 These scripts will generate a tarball for MySQL and for OpenLDAP containers data.
 
-## Restore volumes data
+**Your containers must be stopped.**
 
-To restore data, **your containers must exist**.
+## Restore volumes data
 
 Place the backup tarballs in the root of this directory, and use the `volumes_restore.bat` script for Windows or `volumes_backup.sh` script for Linux.
 
+**The iiq-tomcat container must be in the same version than the MySQL backup.**
+
+**Your containers must exist and must be stopped.**
+
 ## Update version
 
-If you want to change the IdentityIQ version or change the patch version, you must:
+If you want to deploy another custom war, another IdentityIQ version or another patch version, you must:
 1. Edit the **.env** file with the new version.
 2. Remove the current containers using `docker-compose down`.
 3. Remove the image **docker-identityiq_tomcat** using `docker image rm docker-identityiq_tomcat`.
@@ -87,6 +91,8 @@ If you want to change the IdentityIQ version or change the patch version, you mu
 5. Rebuild the iiq-tomcat image and recreate the containers using `docker-compose up`.
 
 **WARNING, this action will delete your containers and all the data they contain.**
+
+*As the `volumes_backup` script performs a backup of the entire database, it is not possible to backup the data, upgrade the IIQ version, then restore the backup, because the IdentityIQ schema version will be the version retrieved during backup.*
 
 # Ressources
 
