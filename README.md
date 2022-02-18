@@ -86,9 +86,10 @@ Place the backup tarballs in the root of this directory, and use the `volumes_re
 If you want to deploy another custom war, another IdentityIQ version or another patch version, you must:
 1. Edit the **.env** file with the new version.
 2. Remove the current containers using `docker-compose down`.
-3. Remove the image **docker-identityiq_tomcat** using `docker image rm docker-identityiq_tomcat`.
-4. Clean the old volumes using `docker volume prune`.
-5. Rebuild the iiq-tomcat image and recreate the containers using `docker-compose up`.
+3. Clean the old volumes using `docker volume prune`.
+4. Remove the image **docker-identityiq_tomcat** using `docker image rm docker-identityiq_tomcat`.
+5. Rebuild the iiq-tomcat image using `docker-compose build --no-cache`
+6. Recreate the containers using `docker-compose up`.
 
 **WARNING, this action will delete your containers and all the data they contain.**
 
