@@ -22,7 +22,7 @@ To use this project, you must:
 2. Edit the **.env** file:
     1. Update the **IIQ_VERSION** variable by the version you are using *(Exemple: 8.2 for identityiq-8.2.zip)*.
     1. Specify a patch with **IIQ_PATCH** *(Exemple: p1 for identityiq-8.2p1.jar, nothing for no patch)*.
-    1. Change the **IIQ_CUSTOM_WAR** variable to `yes` if you are deploying a custom war.
+    1. Change the **IIQ_CUSTOM_WAR** variable to `yes` if you are deploying a custom war, `no` otherwise.
 
 3. Go to the root of this directory and run `docker-compose up`. This command will build the **docker-identityiq_tomcat** image and create all the containers.
 
