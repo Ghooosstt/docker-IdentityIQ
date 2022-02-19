@@ -17,7 +17,11 @@ To use this project, you must:
 
 ## Setup
 
-1. Drop your **identityiq-\<version\>.zip** file, and your **identityiq\<version\>\<patch\>.jar** file in the root of this directory. *You can also deploy a custom war file by dropping your 'identityiq.war' file.*
+1. Drop your **identityiq-\<version\>.zip** file, and your **identityiq\<version\>\<patch\>.jar** file in the root of this directory.
+
+- You can also deploy a custom war file by dropping your **identityiq.war** file and following these conditions:
+    1. File name must be 'identityiq.war'.
+    1. `iiq.properties` of your custom war must be configured on localhost.
 
 2. Edit the **.env** file:
     1. Update the **IIQ_VERSION** variable by the version you are using *(Exemple: 8.2 for identityiq-8.2.zip)*.
@@ -71,15 +75,14 @@ If you need to send your containers data to another host, or if you want to back
 
 These scripts will generate a tarball for MySQL and for OpenLDAP containers data.
 
-**Your containers must be stopped.**
+- **Your containers must be stopped.**
 
 ## Restore volumes data
 
 Place the backup tarballs in the root of this directory, and use the `volumes_restore.bat` script for Windows or `volumes_backup.sh` script for Linux.
 
-**The iiq-tomcat container must be in the same version as the MySQL backup.**
-
-**Your containers must exist and must be stopped.**
+- **The iiq-tomcat container must be in the same version as the MySQL backup.**
+- **Your containers must exist and must be stopped.**
 
 ## Update version
 
