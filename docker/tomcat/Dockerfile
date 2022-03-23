@@ -27,6 +27,6 @@ RUN if [ "$IIQ_CUSTOM_WAR" != "yes" ] && [ ! -z "$IIQ_PATCH" ]; then unzip -o id
 
 # Copy container startup script.
 WORKDIR /usr/local/tomcat/
-COPY entrypoint.sh .
+COPY docker/tomcat/entrypoint.sh .
 RUN chmod +x entrypoint.sh
 ENTRYPOINT [ "./entrypoint.sh" ]
