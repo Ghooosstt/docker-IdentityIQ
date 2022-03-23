@@ -7,9 +7,8 @@ ENV IIQ_PATCH=${IIQ_PATCH}
 ENV IIQ_CUSTOM_WAR=${IIQ_CUSTOM_WAR}
 WORKDIR /work
 
-# Get identityiq-<version>.zip and identityiq.war from host.
-COPY identityiq-${IIQ_VERSION}.zi* .
-COPY identityiq.wa* .
+# Get identityiq-<version>.zip / identityiq<version><patch>.jar (if exists) / identityiq.war (if exists) from host and copy them into the image.
+COPY identityiq-${IIQ_VERSION}.zi* identityiq-${IIQ_VERSION}${IIQ_PATCH}.ja* identityiq.wa* ./
 
 # If IIQ_CUSTOM_WAR is NOT set to yes, remove custom identityiq.war if the file is present and unzip identityiq-<version>.zip to get default war file.
 # Else if IIQ_CUSTOM_WAR is set to yes, remove identityiq.zip file and patch.jar if they are present in order to reduce the image size.
@@ -20,8 +19,6 @@ RUN mv identityiq.war /usr/local/tomcat/webapps/
 RUN unzip /usr/local/tomcat/webapps/identityiq.war -d /usr/local/tomcat/webapps/identityiq
 RUN rm /usr/local/tomcat/webapps/identityiq.war
 
-# Get identityiq<version><patch>.jar if exist.
-COPY identityiq-${IIQ_VERSION}${IIQ_PATCH}.ja* .
 # Unzip the patch in webapps tomcat directory if there is no custom war and if the IIQ_PATCH variable environment is set.
 RUN if [ "$IIQ_CUSTOM_WAR" != "yes" ] && [ ! -z "$IIQ_PATCH" ]; then unzip -o identityiq-${IIQ_VERSION}${IIQ_PATCH}.jar -d /usr/local/tomcat/webapps/identityiq; fi
 
