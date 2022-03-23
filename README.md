@@ -96,7 +96,9 @@ If you want to deploy another custom war, another IdentityIQ version or another 
 
 **WARNING, this action will delete your containers and all the data they contain.**
 
-*As the `volumes_backup` script performs a backup of the entire database, it is not possible to backup the data, upgrade the IIQ version, then restore the backup, because the IdentityIQ schema version will be the version retrieved during backup.*
+- *Step 2 to step 4 can be automated using **reset_containers.bat** and **reset_containers.sh** scripts.*
+
+- *As the `volumes_backup` script performs a backup of the entire database, it is not possible to backup the data, upgrade the IIQ version, then restore the backup, because the IdentityIQ schema version will be the version retrieved during backup.*
 
 # Ressources
 
