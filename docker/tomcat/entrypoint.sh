@@ -19,8 +19,8 @@ if [ ! -e $CONTAINER_ALREADY_STARTED ]; then
     # Update IIQ database config file.
     sed -i 's/localhost/iiq-mysql/g' /usr/local/tomcat/webapps/identityiq/WEB-INF/classes/iiq.properties
 
-    # Update init file with mailslurper smtp server.
-    sed -i 's/mail.example.com/iiq-mailslurper/g' /usr/local/tomcat/webapps/identityiq/WEB-INF/config/init.xml
+    # Update init file with mailslurper smtp server. In a custom war default smtp config is in 'init-default_org.xml' file, and for default package smtp config is in 'init.xml' file.
+    if [ "$IIQ_CUSTOM_WAR" = "yes" ]; then sed -i 's/mail.example.com/iiq-mailslurper/g' /usr/local/tomcat/webapps/identityiq/WEB-INF/config/init-default_org.xml; else sed -i 's/mail.example.com/iiq-mailslurper/g' /usr/local/tomcat/webapps/identityiq/WEB-INF/config/init.xml; fi
 
     # Setup iiq binary.
     cd /usr/local/tomcat/webapps/identityiq/WEB-INF/bin
@@ -42,7 +42,7 @@ if [ ! -e $CONTAINER_ALREADY_STARTED ]; then
     echo import init.xml
     echo "import init.xml" | ./iiq console
 
-    # In a custom war, init.xml already contains init-lcm.xml and sp.init-custom.xml. If it's not a custom war, we need to import init-lcm.xml.
+    # In a custom war 'init.xml' file already contains 'init-lcm.xml' and 'sp.init-custom.xml' files. If it's not a custom war, we need to import 'init-lcm.xml'.
     if [ "$IIQ_CUSTOM_WAR" != "yes" ]; then echo import init-lcm.xml && echo "import init-lcm.xml" | ./iiq console; fi
 
     # Launch iiq patch command if the IIQ_PATCH variable environment is set.
