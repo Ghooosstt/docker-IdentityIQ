@@ -21,7 +21,7 @@ To use this project, you must:
 
 - You can also deploy a custom war file by dropping your **identityiq.war** file and following these conditions:
     1. File name must be 'identityiq.war'.
-    1. `iiq.properties` of your custom war must be configured on localhost.
+    1. `iiq.properties` of your custom war must be configured on **localhost** with **identityiq** and **identityiqPlugin** users.
 
 2. Edit the **.env** file:
     1. Update the **IIQ_VERSION** variable by the version you are using *(Exemple: 8.2 for identityiq-8.2.zip)*.
@@ -52,6 +52,10 @@ The OpenLDAP server listens on port **389** and is accessible through the phpLDA
 * Admin password: root
 
 The MailSlurper server listens on port **25** and the emails are visible at [http://localhost:8090](http://localhost:8090).
+
+**To communicate from IdentityIQ to OpenLDAP or MailSlurper, use containers name:**
+* iiq-openldap
+* iiq-mailslurper (email configuration is already setup by the *entrypoint.sh* script).
 
 ## Usage
 
