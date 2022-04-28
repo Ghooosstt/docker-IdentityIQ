@@ -12,7 +12,7 @@ All theses services are connected through a network bridge.
 ## Requirements
 
 To use this project, you must:
-1. Install [Docker](https://www.docker.com/get-started)
+1. Install [Docker](https://www.docker.com/get-started).
 2. Have an IdentityIQ zip archive with the version of your choice from [Compass](https://community.sailpoint.com/t5/IdentityIQ-Server-Software/ct-p/IdentityIQ).
 
 ## Setup
