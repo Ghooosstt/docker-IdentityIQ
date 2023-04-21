@@ -5,6 +5,10 @@ ENV IIQ_VERSION=${IIQ_VERSION}
 ENV IIQ_PATCH=${IIQ_PATCH}
 WORKDIR /work
 
+# Update and install unzip
+RUN apt update
+RUN apt install unzip -y
+
 # Get identityiq-<version>.zip from host and unzip it in webapps tomcat directory
 COPY identityiq-${IIQ_VERSION}.zip .
 RUN unzip identityiq-${IIQ_VERSION}.zip
