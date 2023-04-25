@@ -7,6 +7,10 @@ ENV IIQ_PATCH=${IIQ_PATCH}
 ENV IIQ_CUSTOM_WAR=${IIQ_CUSTOM_WAR}
 WORKDIR /work
 
+# Install unzip tool
+RUN apt-get clean && apt-get autoclean && apt-get update
+RUN apt-get install -y unzip
+
 # Get identityiq-<version>.zip / identityiq<version><patch>.jar (if exists) / identityiq.war (if exists) from host and copy them into the image.
 COPY identityiq-${IIQ_VERSION}.zi* identityiq-${IIQ_VERSION}${IIQ_PATCH}.ja* identityiq.wa* ./
 

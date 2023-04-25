@@ -9,7 +9,6 @@ if [ ! -e $CONTAINER_ALREADY_STARTED ]; then
     echo "-- First container startup --"
 
     # Install SQL Client.
-    apt-get clean && apt-get autoclean && apt-get update
     apt-get install -y mariadb-server
     service mariadb start
 
