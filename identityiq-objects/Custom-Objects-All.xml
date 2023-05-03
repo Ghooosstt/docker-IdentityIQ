@@ -1,0 +1,496 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE sailpoint PUBLIC "sailpoint.dtd" "sailpoint.dtd">
+<sailpoint>
+
+    <!-- OpenLDAP connector -->
+    <Application authoritative="true" connector="sailpoint.connector.LDAPConnector" featuresString="AUTHENTICATE, PROVISIONING, SYNC_PROVISIONING, PASSWORD, MANAGER_LOOKUP, SEARCH" icon="directory2Icon" name="OpenLDAP" profileClass="" type="OpenLDAP - Direct">
+    <Attributes>
+        <Map>
+        <entry key="LDAPApplicationVersion" value="2.0"/>
+        <entry key="afterProvisioningRule"/>
+        <entry key="authSearchAttributes">
+            <value>
+            <List>
+                <String>cn</String>
+                <String>uid</String>
+                <String>mail</String>
+            </List>
+            </value>
+        </entry>
+        <entry key="authorizationType" value="simple"/>
+        <entry key="beforeProvisioningRule"/>
+        <entry key="charsToEscapeAtEndInDN" value=" "/>
+        <entry key="charsToEscapeAtStartInDN" value=" #"/>
+        <entry key="charsToEscapeInDN" value=",+\&quot;&lt;>;"/>
+        <entry key="charsToEscapeWhileProvisioning" value="/"/>
+        <entry key="compositeDefinition"/>
+        <entry key="convertHexToCharacter" value="true"/>
+        <entry key="group.searchDNs">
+            <value>
+            <List>
+                <Map>
+                <entry key="iterateSearchFilter"/>
+                <entry key="objectType" value="group"/>
+                <entry key="searchDN" value="ou=Group,dc=my-company,dc=com"/>
+                <entry key="searchScope" value="SUBTREE"/>
+                </Map>
+            </List>
+            </value>
+        </entry>
+        <entry key="host" value="iiq-openldap"/>
+        <entry key="nativeChangeDetectionAttributeScope" value="entitlements"/>
+        <entry key="nativeChangeDetectionAttributes"/>
+        <entry key="nativeChangeDetectionEnabled">
+            <value>
+            <Boolean></Boolean>
+            </value>
+        </entry>
+        <entry key="nativeChangeDetectionOperations"/>
+        <entry key="pageSize" value="100"/>
+        <entry key="password" value="root"/>
+        <entry key="passwordAttr" value="userPassword"/>
+        <entry key="port" value="389"/>
+        <entry key="searchDNs">
+            <value>
+            <List>
+                <Map>
+                <entry key="groupMembershipSearchScope"/>
+                <entry key="iterateSearchFilter"/>
+                <entry key="searchDN" value="ou=People,dc=my-company,dc=com"/>
+                <entry key="searchScope" value="SUBTREE"/>
+                </Map>
+            </List>
+            </value>
+        </entry>
+        <entry key="skipBackslashInFilter" value="true"/>
+        <entry key="sysDescriptions">
+            <value>
+            <Map>
+                <entry key="en_US"/>
+            </Map>
+            </value>
+        </entry>
+        <entry key="templateApplication" value="OpenLDAP Template"/>
+        <entry key="useSSL">
+            <value>
+            <Boolean></Boolean>
+            </value>
+        </entry>
+        <entry key="user" value="cn=admin,dc=my-company,dc=com"/>
+        </Map>
+    </Attributes>
+    <Owner>
+        <Reference class="sailpoint.object.Identity" name="spadmin"/>
+    </Owner>
+    <ProvisioningForms>
+        <Form name="account" objectType="account" type="Create">
+        <Attributes>
+            <Map>
+            <entry key="pageTitle" value="account"/>
+            </Map>
+        </Attributes>
+        <Section>
+            <Field displayName="con_prov_policy_ldap_user_DN" helpKey="help_con_prov_policy_ldap_user_DN" name="dn" required="true" type="string"/>
+            <Field displayName="con_prov_policy_ldap_password" helpKey="help_con_prov_policy_ldap_password" name="password" required="true" type="secret"/>
+            <Field displayName="con_prov_policy_ldap_full_name" helpKey="help_con_prov_policy_ldap_full_name" name="cn" required="true" type="string"/>
+            <Field displayName="con_prov_policy_ldap_first_name" helpKey="help_con_prov_policy_ldap_first_name" name="givenName" reviewRequired="true" type="string"/>
+            <Field displayName="con_prov_policy_ldap_last_name" helpKey="help_con_prov_policy_ldap_last_name" name="sn" required="true" type="string"/>
+        </Section>
+        </Form>
+        <Form name="group create" objectType="group" type="Create">
+        <Attributes>
+            <Map>
+            <entry key="pageTitle" value="group create"/>
+            </Map>
+        </Attributes>
+        <Section>
+            <Field displayName="con_prov_policy_ldap_group_DN" helpKey="help_con_prov_policy_ldap_group_DN" name="dn" required="true" reviewRequired="true" type="string"/>
+            <Field displayName="con_prov_policy_ldap_description" helpKey="help_con_prov_policy_ldap_description" name="description" reviewRequired="true" type="string"/>
+            <Field displayName="con_prov_policy_ldap_member" helpKey="help_con_prov_policy_ldap_member" name="uniqueMember" required="true" reviewRequired="true" type="string"/>
+        </Section>
+        </Form>
+        <Form name="group create" objectType="posixgroup" type="Create">
+        <Attributes>
+            <Map>
+            <entry key="pageTitle" value="group create"/>
+            </Map>
+        </Attributes>
+        <Section>
+            <Field displayName="con_prov_policy_ldap_group_DN" helpKey="help_con_prov_policy_ldap_group_DN" name="dn" required="true" reviewRequired="true" type="string"/>
+            <Field displayName="con_prov_policy_ldap_GID" helpKey="help_con_prov_policy_ldap_GID" name="gidNumber" required="true" reviewRequired="true" type="int"/>
+            <Field displayName="con_prov_policy_ldap_description" helpKey="help_con_prov_policy_ldap_description" name="description" reviewRequired="true" type="string"/>
+        </Section>
+        </Form>
+        <Form name="group create" objectType="nisNetgroup" type="Create">
+        <Attributes>
+            <Map>
+            <entry key="pageTitle" value="group create"/>
+            </Map>
+        </Attributes>
+        <Section>
+            <Field displayName="con_prov_policy_ldap_group_DN" helpKey="help_con_prov_policy_ldap_group_DN" name="dn" required="true" reviewRequired="true" type="string"/>
+            <Field displayName="con_prov_policy_ldap_description" helpKey="help_con_prov_policy_ldap_description" name="description" reviewRequired="true" type="string"/>
+        </Section>
+        </Form>
+        <Form name="edit group" objectType="group" type="Update">
+        <Attributes>
+            <Map>
+            <entry key="pageTitle" value="edit group"/>
+            </Map>
+        </Attributes>
+        <Section>
+            <Field displayName="con_prov_policy_ldap_description" name="description" reviewRequired="true" type="string"/>
+        </Section>
+        </Form>
+        <Form name="edit group" objectType="posixgroup" type="Update">
+        <Attributes>
+            <Map>
+            <entry key="pageTitle" value="edit group"/>
+            </Map>
+        </Attributes>
+        <Section>
+            <Field displayName="con_prov_policy_ldap_description" name="description" reviewRequired="true" type="string"/>
+        </Section>
+        </Form>
+        <Form name="edit group" objectType="nisNetgroup" type="Update">
+        <Attributes>
+            <Map>
+            <entry key="pageTitle" value="edit group"/>
+            </Map>
+        </Attributes>
+        <Section>
+            <Field displayName="con_prov_policy_ldap_description" name="description" reviewRequired="true" type="string"/>
+        </Section>
+        </Form>
+    </ProvisioningForms>
+    <Schemas>
+        <Schema displayAttribute="cn" identityAttribute="dn" instanceAttribute="" nativeObjectType="inetOrgPerson" objectType="account">
+        <AttributeDefinition name="businessCategory" type="string">
+            <Description>business category</Description>
+        </AttributeDefinition>
+        <AttributeDefinition multi="true" name="carLicense" type="string">
+            <Description>vehicle license or registration plate</Description>
+        </AttributeDefinition>
+        <AttributeDefinition name="cn" type="string">
+            <Description>common name(s) for which the entity is known by</Description>
+        </AttributeDefinition>
+        <AttributeDefinition name="dn" type="string">
+            <Description>distinguished name for which the entity is known by</Description>
+        </AttributeDefinition>
+        <AttributeDefinition name="departmentNumber" type="string">
+            <Description>identifies a department within an organization</Description>
+        </AttributeDefinition>
+        <AttributeDefinition name="description" type="string">
+            <Description>descriptive information</Description>
+        </AttributeDefinition>
+        <AttributeDefinition name="destinationIndicator" type="string">
+            <Description>destination indicator</Description>
+        </AttributeDefinition>
+        <AttributeDefinition name="displayName" type="string">
+            <Description>preferred name to be used when displaying entries</Description>
+        </AttributeDefinition>
+        <AttributeDefinition name="employeeNumber" type="string">
+            <Description>numerically identifies an employee within an organization</Description>
+        </AttributeDefinition>
+        <AttributeDefinition name="employeeType" type="string">
+            <Description>type of employment for a person</Description>
+        </AttributeDefinition>
+        <AttributeDefinition multi="true" name="facsimileTelephoneNumber" type="string">
+            <Description>Facsimile (Fax) Telephone Number</Description>
+        </AttributeDefinition>
+        <AttributeDefinition name="givenName" type="string">
+            <Description>first name(s) for which the entity is known by</Description>
+        </AttributeDefinition>
+        <AttributeDefinition entitlement="true" managed="true" multi="true" name="groups" schemaObjectType="group" type="string">
+            <Description>List of groups a user is a member</Description>
+        </AttributeDefinition>
+        <AttributeDefinition entitlement="true" managed="true" multi="true" name="posixgroups" schemaObjectType="posixgroup" type="string">
+            <Description>List of posix groups a user is a member</Description>
+        </AttributeDefinition>
+        <AttributeDefinition entitlement="true" managed="true" multi="true" name="nisNetgroups" schemaObjectType="nisNetgroup" type="string">
+            <Description>List of nisnet groups a user is a member</Description>
+        </AttributeDefinition>
+        <AttributeDefinition name="homePhone" type="string">
+            <Description>home telephone number</Description>
+        </AttributeDefinition>
+        <AttributeDefinition name="homePostalAddress" type="string">
+            <Description>home postal address</Description>
+        </AttributeDefinition>
+        <AttributeDefinition name="initials" type="string">
+            <Description>initials of some or all of names, but not the surname(s).</Description>
+        </AttributeDefinition>
+        <AttributeDefinition name="internationaliSDNNumber" type="string">
+            <Description>international ISDN number</Description>
+        </AttributeDefinition>
+        <AttributeDefinition name="l" type="string">
+            <Description>city</Description>
+        </AttributeDefinition>
+        <AttributeDefinition name="mail" type="string">
+            <Description>RFC822 Mailbox</Description>
+        </AttributeDefinition>
+        <AttributeDefinition name="manager" type="string">
+            <Description>DN of manager</Description>
+        </AttributeDefinition>
+        <AttributeDefinition name="mobile" type="string">
+            <Description>mobile telephone number</Description>
+        </AttributeDefinition>
+        <AttributeDefinition name="o" type="string">
+            <Description>organization this object belongs to</Description>
+        </AttributeDefinition>
+        <AttributeDefinition name="ou" type="string">
+            <Description>organizational unit this object belongs to</Description>
+        </AttributeDefinition>
+        <AttributeDefinition name="pager" type="string">
+            <Description>pager telephone number</Description>
+        </AttributeDefinition>
+        <AttributeDefinition name="physicalDeliveryOfficeName" type="string">
+            <Description>Physical Delivery Office Name</Description>
+        </AttributeDefinition>
+        <AttributeDefinition name="postOfficeBox" type="string">
+            <Description>Post Office Box</Description>
+        </AttributeDefinition>
+        <AttributeDefinition name="postalAddress" type="string">
+            <Description>postal address</Description>
+        </AttributeDefinition>
+        <AttributeDefinition name="postalCode" type="string">
+            <Description>postal code</Description>
+        </AttributeDefinition>
+        <AttributeDefinition name="preferredDeliveryMethod" type="string">
+            <Description>preferred delivery method</Description>
+        </AttributeDefinition>
+        <AttributeDefinition name="preferredLanguage" type="string">
+            <Description>preferred written or spoken language for a person</Description>
+        </AttributeDefinition>
+        <AttributeDefinition name="pwdReset" type="string">
+            <Description>specifies whether the password has been reset by admin</Description>
+        </AttributeDefinition>
+        <AttributeDefinition name="registeredAddress" type="string">
+            <Description>registered postal address</Description>
+        </AttributeDefinition>
+        <AttributeDefinition name="roomNumber" type="string">
+            <Description>room number</Description>
+        </AttributeDefinition>
+        <AttributeDefinition name="secretary" type="string">
+            <Description>DN of secretary</Description>
+        </AttributeDefinition>
+        <AttributeDefinition name="seeAlso" type="string">
+            <Description>DN of related object</Description>
+        </AttributeDefinition>
+        <AttributeDefinition name="sn" type="string">
+            <Description>last (family) name(s) for which the entity is known by</Description>
+        </AttributeDefinition>
+        <AttributeDefinition name="st" type="string">
+            <Description>state or province which this object resides in</Description>
+        </AttributeDefinition>
+        <AttributeDefinition name="street" type="string">
+            <Description>street address of this object</Description>
+        </AttributeDefinition>
+        <AttributeDefinition name="telephoneNumber" type="string">
+            <Description>Telephone Number</Description>
+        </AttributeDefinition>
+        <AttributeDefinition name="teletexTerminalIdentifier" type="string">
+            <Description>Teletex Terminal Identifier</Description>
+        </AttributeDefinition>
+        <AttributeDefinition name="telexNumber" type="string">
+            <Description>Telex Number</Description>
+        </AttributeDefinition>
+        <AttributeDefinition name="title" type="string">
+            <Description>title associated with the entity</Description>
+        </AttributeDefinition>
+        <AttributeDefinition name="uid" type="string">
+            <Description>user identifier</Description>
+        </AttributeDefinition>
+        <AttributeDefinition multi="true" name="objectClass" type="string">
+            <Description>object classes of the entity</Description>
+        </AttributeDefinition>
+        </Schema>
+        <Schema aggregationType="group" descriptionAttribute="" displayAttribute="cn" featuresString="PROVISIONING" identityAttribute="dn" instanceAttribute="" nativeObjectType="posixgroup" objectType="posixgroup">
+        <AttributeDefinition name="cn" type="string">
+            <Description>common name(s) for which the entity is known by</Description>
+        </AttributeDefinition>
+        <AttributeDefinition multi="true" name="memberUid" type="string">
+            <Description>unique member of a posixGroup</Description>
+        </AttributeDefinition>
+        <AttributeDefinition name="dn" type="string">
+            <Description>Directory Path</Description>
+        </AttributeDefinition>
+        <AttributeDefinition name="gidNumber" type="string">
+            <Description>Group ID</Description>
+        </AttributeDefinition>
+        <AttributeDefinition name="description" type="string">
+            <Description>descriptive information</Description>
+        </AttributeDefinition>
+        <Attributes>
+            <Map>
+            <entry key="groupMemberAttribute" value="memberUid"/>
+            <entry key="memberAttribute">
+                <value>
+                <List>
+                    <String>cn</String>
+                    <String>uid</String>
+                </List>
+                </value>
+            </entry>
+            </Map>
+        </Attributes>
+        </Schema>
+        <Schema aggregationType="group" descriptionAttribute="" displayAttribute="cn" featuresString="PROVISIONING" identityAttribute="dn" instanceAttribute="" nativeObjectType="nisNetgroup" objectType="nisNetgroup">
+        <AttributeDefinition name="cn" type="string">
+            <Description>common name(s) for which the entity is known by</Description>
+        </AttributeDefinition>
+        <AttributeDefinition multi="true" name="nisNetgroupTriple" type="string">
+            <Description>unique member of a nisNetgroup</Description>
+        </AttributeDefinition>
+        <AttributeDefinition name="dn" type="string">
+            <Description>Directory Path</Description>
+        </AttributeDefinition>
+        <AttributeDefinition name="description" type="string">
+            <Description>descriptive information</Description>
+        </AttributeDefinition>
+        <Attributes>
+            <Map>
+            <entry key="groupMemberAttribute" value="nisNetgroupTriple"/>
+            <entry key="memberAttribute">
+                <value>
+                <List>
+                    <String>cn</String>
+                    <String>uid</String>
+                </List>
+                </value>
+            </entry>
+            <entry key="memberPrefix" value="{,"/>
+            <entry key="memberSuffix" value=",}"/>
+            </Map>
+        </Attributes>
+        </Schema>
+        <Schema descriptionAttribute="description" displayAttribute="cn" featuresString="PROVISIONING" identityAttribute="dn" instanceAttribute="" nativeObjectType="groupOfUniqueNames" objectType="group">
+        <AttributeDefinition name="cn" type="string">
+            <Description>common name(s) for which the entity is known by</Description>
+        </AttributeDefinition>
+        <AttributeDefinition name="dn" type="string">
+            <Description>Directory Path</Description>
+        </AttributeDefinition>
+        <AttributeDefinition name="o" type="string">
+            <Description>organization this object belongs to</Description>
+        </AttributeDefinition>
+        <AttributeDefinition name="ou" type="string">
+            <Description>organizational unit this object belongs to</Description>
+        </AttributeDefinition>
+        <AttributeDefinition name="owner" type="string">
+            <Description>owner (of the object)</Description>
+        </AttributeDefinition>
+        <AttributeDefinition name="description" type="string">
+            <Description>descriptive information</Description>
+        </AttributeDefinition>
+        <AttributeDefinition name="uniqueMember" type="string">
+            <Description>group membership attribute</Description>
+        </AttributeDefinition>
+        <Attributes>
+            <Map>
+            <entry key="groupMemberAttribute" value="uniqueMember"/>
+            <entry key="memberAttribute" value="dn"/>
+            </Map>
+        </Attributes>
+        </Schema>
+    </Schemas>
+    <ApplicationScorecard/>
+    </Application>
+
+    <!-- Task AccountAggregation OpenLDAP -->
+    <TaskDefinition formPath="/monitor/tasks/accountAggregationTask.xhtml" name="Custom-TaskDefinition-AccountAggregation-OpenLDAP" resultAction="Rename" subType="task_item_type_acct_aggregation" type="AccountAggregation">
+    <Attributes>
+        <Map>
+        <entry key="TaskSchedule.host"/>
+        <entry key="applications" value="OpenLDAP"/>
+        <entry key="checkDeleted" value="true"/>
+        <entry key="checkHistory" value="false"/>
+        <entry key="checkPolicies" value="false"/>
+        <entry key="correlateEntitlements" value="false"/>
+        <entry key="correlateOnly" value="false"/>
+        <entry key="correlateScope" value="false"/>
+        <entry key="deltaAggregation" value="false"/>
+        <entry key="enablePartitioning" value="false"/>
+        <entry key="haltOnMaxError" value="false"/>
+        <entry key="noAutoCreateApplications" value="false"/>
+        <entry key="noAutoCreateScopes" value="false"/>
+        <entry key="noNeedsRefresh" value="false"/>
+        <entry key="noOptimizeReaggregation" value="false"/>
+        <entry key="promoteManagedAttributes" value="false"/>
+        <entry key="refreshScorecard" value="false"/>
+        <entry key="sequential" value="false"/>
+        <entry key="taskCompletionEmailNotify" value="Disabled"/>
+        <entry key="taskCompletionEmailRecipients"/>
+        <entry key="taskCompletionEmailTemplate"/>
+        </Map>
+    </Attributes>
+    <Description>Task template for application account scanning.</Description>
+    <Owner>
+        <Reference class="sailpoint.object.Identity" name="spadmin"/>
+    </Owner>
+    <Parent>
+        <Reference class="sailpoint.object.TaskDefinition" name="Account Aggregation"/>
+    </Parent>
+    </TaskDefinition>
+
+    <!-- Task AccountGroupAggregation OpenLDAP -->
+    <TaskDefinition formPath="/monitor/tasks/accountGroupAggregationTask.xhtml" name="Custom-TaskDefinition-AccountGroupAggregation-OpenLDAP" resultAction="Rename" subType="task_item_type_acct_grp_aggregation" type="AccountGroupAggregation">
+    <Attributes>
+        <Map>
+        <entry key="TaskSchedule.host"/>
+        <entry key="aggregationType" value="group"/>
+        <entry key="applications" value="OpenLDAP"/>
+        <entry key="checkDeleted" value="true"/>
+        <entry key="deltaAggregation" value="false"/>
+        <entry key="enablePartitioning" value="false"/>
+        <entry key="groupSchema"/>
+        <entry key="haltOnMaxError" value="false"/>
+        <entry key="promoteClassifications" value="false"/>
+        <entry key="taskCompletionEmailNotify" value="Disabled"/>
+        <entry key="taskCompletionEmailRecipients"/>
+        <entry key="taskCompletionEmailTemplate"/>
+        </Map>
+    </Attributes>
+    <Description>Task template for application group scanning.</Description>
+    <Owner>
+        <Reference class="sailpoint.object.Identity" name="spadmin"/>
+    </Owner>
+    <Parent>
+        <Reference class="sailpoint.object.TaskDefinition" name="Account Group Aggregation"/>
+    </Parent>
+    </TaskDefinition>
+
+  <!-- ObjectConfig Identity (merge option) -->
+  <ImportAction name="merge">
+    <ObjectConfig name="Identity">
+        <ObjectAttribute displayName="att_display_name" editMode="ReadOnly" name="displayName" standard="true" type="string">
+            <AttributeSource name="cn">
+            <ApplicationRef>
+                <Reference class="sailpoint.object.Application" name="OpenLDAP"/>
+            </ApplicationRef>
+            </AttributeSource>
+        </ObjectAttribute>
+        <ObjectAttribute displayName="att_last_name" editMode="ReadOnly" name="lastname" standard="true" type="string">
+            <AttributeSource name="sn">
+            <ApplicationRef>
+                <Reference class="sailpoint.object.Application" name="OpenLDAP"/>
+            </ApplicationRef>
+            </AttributeSource>
+        </ObjectAttribute>
+        <ObjectAttribute displayName="att_email" editMode="ReadOnly" name="email" standard="true" type="string">
+            <AttributeSource name="mail">
+            <ApplicationRef>
+                <Reference class="sailpoint.object.Application" name="OpenLDAP"/>
+            </ApplicationRef>
+            </AttributeSource>
+        </ObjectAttribute>
+        <ObjectAttribute displayName="att_first_name" editMode="ReadOnly" name="firstname" standard="true" type="string">
+            <AttributeSource name="givenName">
+            <ApplicationRef>
+                <Reference class="sailpoint.object.Application" name="OpenLDAP"/>
+            </ApplicationRef>
+            </AttributeSource>
+        </ObjectAttribute>
+    </ObjectConfig>
+  </ImportAction>
+
+</sailpoint>

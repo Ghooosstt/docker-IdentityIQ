@@ -1,6 +1,6 @@
 # Docker-IdentityIQ
 Deploy a SailPoint IdentityIQ instance using Docker. This project use docker-compose to deploy:
-* An Apache Tomcat container with IdentityIQ.
+* An Apache Tomcat container with IdentityIQ (JDK 11).
 * A MySQL container.
 * A phpMyAdmin container.
 * An OpenLDAP container.
@@ -8,6 +8,8 @@ Deploy a SailPoint IdentityIQ instance using Docker. This project use docker-com
 * A SMTP server container.
 
 All theses services are connected through a network bridge.
+
+*Tested from IdentityIQ 8.1 without patch to IdentityIQ 8.3p2.*
 
 ## Requirements
 
@@ -17,15 +19,15 @@ To use this project, you must:
 
 ## Setup
 
-1. Drop your **identityiq-\<version\>.zip** file, and your **identityiq\<version\>\<patch\>.jar** file in the root of this directory.
+1. - Drop your **identityiq-\<version\>.zip** file, and your **identityiq\<version\>\<patch\>.jar** file in the root of this directory.
 
 - You can also deploy a custom war file by dropping your **identityiq.war** file and following these conditions:
     1. File name must be 'identityiq.war'.
     1. `iiq.properties` of your custom war must be configured on **localhost** with **identityiq** and **identityiqPlugin** users.
 
 2. Edit the **.env** file:
-    1. Update the **IIQ_VERSION** variable by the version you are using *(Exemple: 8.2 for identityiq-8.2.zip)*.
-    1. Specify a patch with **IIQ_PATCH** *(Exemple: p1 for identityiq-8.2p1.jar, nothing for no patch)*.
+    1. Update the **IIQ_VERSION** variable by the version you are using *(Example: 8.2 for identityiq-8.2.zip)*.
+    1. Specify a patch with **IIQ_PATCH** *(Example: p1 for identityiq-8.2p1.jar, nothing for no patch)*.
     1. Change the **IIQ_CUSTOM_WAR** variable to `yes` if you are deploying a custom war, `no` otherwise.
 
 3. Go to the root of this directory and run `docker-compose up`. This command will build the **docker-identityiq_tomcat** image and create all the containers.
@@ -53,11 +55,15 @@ The OpenLDAP server listens on port **389** and is accessible through the phpLDA
 
 The MailSlurper server listens on port **25** and the emails are visible at [http://localhost:8090](http://localhost:8090).
 
-**To communicate from IdentityIQ to OpenLDAP or MailSlurper, use containers name:**
+## Communications between containers
+
+Since all containers are connected through a network bridge, you must use container names to communicate with them. For example, to communicate from IdentityIQ to OpenLDAP or MailSlurper, use the following names:
 * iiq-openldap
 * iiq-mailslurper (email configuration is already setup by the *entrypoint.sh* script).
 
 ## Usage
+
+To init the containers for the first time, use the command `docker-compose up`. 
 
 To stop the containers, use the command `docker-compose stop`.
 
@@ -77,13 +83,13 @@ To recreate the containers, use the command `docker-compose up`.
 
 If you need to send your containers data to another host, or if you want to backup your volumes data. You can use the `volumes_backup.bat` script for Windows or `volumes_backup.sh` script for Linux.
 
-These scripts will generate a tarball for MySQL and for OpenLDAP containers data.
+These scripts will generate a tar archive of MySQL and OpenLDAP containers data.
 
 - **Your containers must be stopped.**
 
 ## Restore volumes data
 
-Place the backup tarballs in the root of this directory, and use the `volumes_restore.bat` script for Windows or `volumes_backup.sh` script for Linux.
+Place the backup tar archives in the root of this directory, and use the `volumes_restore.bat` script for Windows or `volumes_backup.sh` script for Linux.
 
 - **The iiq-tomcat container must be in the same version as the MySQL backup.**
 - **Your containers must exist and must be stopped.**
@@ -100,9 +106,13 @@ If you want to deploy another custom war, another IdentityIQ version or another 
 
 **WARNING, this action will delete your containers and all the data they contain.**
 
-- *Step 2 to step 4 can be automated using **reset_containers.bat** and **reset_containers.sh** scripts.*
+- *Step 2 to step 4 can be automated using **reset_containers.bat** or **reset_containers.sh** scripts.*
 
 - *As the `volumes_backup` script performs a backup of the entire database, it is not possible to backup the data, upgrade the IIQ version, then restore the backup, because the IdentityIQ schema version will be the version retrieved during backup.*
+
+# Contribution
+
+If you want to help improve the project, feel free to fork it and make a pull request. I will be happy to merge it.
 
 # Ressources
 

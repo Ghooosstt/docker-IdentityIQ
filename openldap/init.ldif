@@ -16,8 +16,10 @@ changetype: add
 objectClass: inetOrgPerson
 description: John Smith from Accounting. John is the project manager of the building project, so contact him with any questions.
 cn: John Smith
+givenName: John
 sn: Smith
 uid: jsmith1
+mail: john.smith@my-company.com
 
 # Add Sally Brown to the organization
 dn: uid=sbrown20,ou=People,dc=my-company,dc=com
@@ -25,8 +27,10 @@ changetype: add
 objectClass: inetOrgPerson
 description: Sally Brown from engineering. Sally is responsible for designing the blue prints and testing the structural integrity of the design.
 cn: Sally Brown
+givenName: Sally
 sn: Brown
 uid: sbrown20
+mail: sally.brown@my-company.com
 
 # Create group Engineer
 dn: cn=Engineer,ou=Group,dc=my-company,dc=com

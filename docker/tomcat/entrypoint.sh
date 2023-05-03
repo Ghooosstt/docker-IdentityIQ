@@ -37,6 +37,7 @@ if [ ! -e $CONTAINER_ALREADY_STARTED ]; then
     if [ ! -z "$IIQ_PATCH" ]; then echo Patch $IIQ_VERSION$IIQ_PATCH detected, patching IIQ database... && mysql --user=root --password=root -h iiq-mysql < upgrade_identityiq_tables-$IIQ_VERSION$IIQ_PATCH.mysql; fi
 
     # Import objects using iiq console.
+    # We need to import init.xml file before executing the patch command
     cd /usr/local/tomcat/webapps/identityiq/WEB-INF/bin
     echo import init.xml
     echo "import init.xml" | ./iiq console
@@ -46,6 +47,10 @@ if [ ! -e $CONTAINER_ALREADY_STARTED ]; then
 
     # Launch iiq patch command if the IIQ_PATCH variable environment is set.
     if [ ! -z "$IIQ_PATCH" ]; then ./iiq patch $IIQ_VERSION$IIQ_PATCH; fi
+
+    # Import custom objects using iiq console.
+    echo import custom files from identityiq-objects folder
+    echo "import /work/Custom-Objects-All.xml" | ./iiq console
 
     # Start tomcat.
     catalina.sh run
