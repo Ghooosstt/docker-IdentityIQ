@@ -83,19 +83,58 @@
         <Reference class="sailpoint.object.Identity" name="spadmin"/>
     </Owner>
     <ProvisioningForms>
-        <Form name="account" objectType="account" type="Create">
-        <Attributes>
+        <Form name="Create Account" objectType="account" type="Create">
+          <Attributes>
             <Map>
-            <entry key="pageTitle" value="account"/>
+              <entry key="pageTitle" value="Create Account"/>
             </Map>
-        </Attributes>
-        <Section>
-            <Field displayName="con_prov_policy_ldap_user_DN" helpKey="help_con_prov_policy_ldap_user_DN" name="dn" required="true" type="string"/>
-            <Field displayName="con_prov_policy_ldap_password" helpKey="help_con_prov_policy_ldap_password" name="password" required="true" type="secret"/>
-            <Field displayName="con_prov_policy_ldap_full_name" helpKey="help_con_prov_policy_ldap_full_name" name="cn" required="true" type="string"/>
-            <Field displayName="con_prov_policy_ldap_first_name" helpKey="help_con_prov_policy_ldap_first_name" name="givenName" reviewRequired="true" type="string"/>
-            <Field displayName="con_prov_policy_ldap_last_name" helpKey="help_con_prov_policy_ldap_last_name" name="sn" required="true" type="string"/>
-        </Section>
+          </Attributes>
+          <Section>
+            <Field displayName="con_prov_policy_ldap_user_DN" helpKey="help_con_prov_policy_ldap_user_DN" name="dn" required="true" type="string">
+              <Script>
+                <Source>return "uid=" + identity.getFirstname() + "." + identity.getLastname() + ",ou=People,dc=my-company,dc=com";</Source>
+              </Script>
+            </Field>
+            <Field displayName="con_prov_policy_ldap_full_name" helpKey="help_con_prov_policy_ldap_full_name" name="cn" required="true" type="string">
+              <Script>
+                <Source>return identity.getFirstname() + " " + identity.getLastname();</Source>
+              </Script>
+            </Field>
+            <Field displayName="con_prov_policy_ldap_first_name" helpKey="help_con_prov_policy_ldap_first_name" name="givenName" type="string">
+              <Script>
+                <Source>return identity.getFirstname();</Source>
+              </Script>
+            </Field>
+            <Field displayName="con_prov_policy_ldap_last_name" helpKey="help_con_prov_policy_ldap_last_name" name="sn" required="true" type="string">
+              <Script>
+                <Source>return identity.getLastname();</Source>
+              </Script>
+            </Field>
+          </Section>
+        </Form>
+        <Form name="Update Account" objectType="account" type="Update">
+          <Attributes>
+            <Map>
+              <entry key="pageTitle" value="Update Account"/>
+            </Map>
+          </Attributes>
+          <Section>
+            <Field displayName="con_prov_policy_ldap_full_name" helpKey="help_con_prov_policy_ldap_full_name" name="cn" required="true" type="string">
+              <Script>
+                <Source>return identity.getFirstname() + " " + identity.getLastname();</Source>
+              </Script>
+            </Field>
+            <Field displayName="con_prov_policy_ldap_first_name" helpKey="help_con_prov_policy_ldap_first_name" name="givenName" type="string">
+              <Script>
+                <Source>return identity.getFirstname();</Source>
+              </Script>
+            </Field>
+            <Field displayName="con_prov_policy_ldap_last_name" helpKey="help_con_prov_policy_ldap_last_name" name="sn" required="true" type="string">
+              <Script>
+                <Source>return identity.getLastname();</Source>
+              </Script>
+            </Field>
+          </Section>
         </Form>
         <Form name="group create" objectType="group" type="Create">
         <Attributes>
@@ -201,7 +240,7 @@
         <AttributeDefinition name="givenName" type="string">
             <Description>first name(s) for which the entity is known by</Description>
         </AttributeDefinition>
-        <AttributeDefinition entitlement="true" managed="true" multi="true" name="groups" schemaObjectType="group" type="string">
+        <AttributeDefinition entitlement="true" managed="true" multi="true" name="groups" type="string">
             <Description>List of groups a user is a member</Description>
         </AttributeDefinition>
         <AttributeDefinition entitlement="true" managed="true" multi="true" name="posixgroups" schemaObjectType="posixgroup" type="string">
@@ -303,6 +342,9 @@
         <AttributeDefinition multi="true" name="objectClass" type="string">
             <Description>object classes of the entity</Description>
         </AttributeDefinition>
+      <AttributeDefinition entitlement="true" managed="true" multi="true" name="memberOf" schemaObjectType="group" type="string">
+        <Description></Description>
+      </AttributeDefinition>
         </Schema>
         <Schema aggregationType="group" descriptionAttribute="" displayAttribute="cn" featuresString="PROVISIONING" identityAttribute="dn" instanceAttribute="" nativeObjectType="posixgroup" objectType="posixgroup">
         <AttributeDefinition name="cn" type="string">
