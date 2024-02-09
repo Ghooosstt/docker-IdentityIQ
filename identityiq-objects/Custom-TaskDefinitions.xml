@@ -1,0 +1,106 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE sailpoint PUBLIC "sailpoint.dtd" "sailpoint.dtd">
+<sailpoint>
+
+    <!-- Task AccountAggregation HR File -->
+    <TaskDefinition formPath="/monitor/tasks/accountAggregationTask.xhtml" name="Custom-TaskDefinition-AccountAggregation-HRFile" resultAction="Rename" subType="task_item_type_acct_aggregation" type="AccountAggregation">
+    <Attributes>
+        <Map>
+        <entry key="TaskSchedule.host"/>
+        <entry key="applications" value="HR File"/>
+        <entry key="checkDeleted" value="true"/>
+        <entry key="checkHistory" value="false"/>
+        <entry key="checkPolicies" value="false"/>
+        <entry key="correlateEntitlements" value="false"/>
+        <entry key="correlateOnly" value="false"/>
+        <entry key="correlateScope" value="false"/>
+        <entry key="deltaAggregation" value="false"/>
+        <entry key="enableManagedAttributeRenameDetection" value="false"/>
+        <entry key="enablePartitioning" value="false"/>
+        <entry key="haltOnMaxError" value="false"/>
+        <entry key="noAutoCreateApplications" value="false"/>
+        <entry key="noAutoCreateScopes" value="false"/>
+        <entry key="noNeedsRefresh" value="false"/>
+        <entry key="noOptimizeReaggregation" value="false"/>
+        <entry key="promoteManagedAttributes" value="false"/>
+        <entry key="refreshScorecard" value="false"/>
+        <entry key="sequential" value="false"/>
+        <entry key="taskCompletionEmailNotify" value="Disabled"/>
+        <entry key="taskCompletionEmailRecipients"/>
+        <entry key="taskCompletionEmailTemplate"/>
+        </Map>
+    </Attributes>
+    <Description>Task template for application account scanning.</Description>
+    <Owner>
+        <Reference class="sailpoint.object.Identity" name="spadmin"/>
+    </Owner>
+    <Parent>
+        <Reference class="sailpoint.object.TaskDefinition" name="Account Aggregation"/>
+    </Parent>
+    </TaskDefinition>
+
+
+    <!-- Task AccountGroupAggregation OpenLDAP -->
+    <TaskDefinition formPath="/monitor/tasks/accountGroupAggregationTask.xhtml" name="Custom-TaskDefinition-AccountGroupAggregation-OpenLDAP" resultAction="Rename" subType="task_item_type_acct_grp_aggregation" type="AccountGroupAggregation">
+    <Attributes>
+        <Map>
+        <entry key="TaskSchedule.host"/>
+        <entry key="aggregationType" value="group"/>
+        <entry key="applications" value="OpenLDAP"/>
+        <entry key="checkDeleted" value="true"/>
+        <entry key="deltaAggregation" value="false"/>
+        <entry key="enablePartitioning" value="false"/>
+        <entry key="groupSchema"/>
+        <entry key="haltOnMaxError" value="false"/>
+        <entry key="promoteClassifications" value="false"/>
+        <entry key="taskCompletionEmailNotify" value="Disabled"/>
+        <entry key="taskCompletionEmailRecipients"/>
+        <entry key="taskCompletionEmailTemplate"/>
+        </Map>
+    </Attributes>
+    <Description>Task template for application group scanning.</Description>
+    <Owner>
+        <Reference class="sailpoint.object.Identity" name="spadmin"/>
+    </Owner>
+    <Parent>
+        <Reference class="sailpoint.object.TaskDefinition" name="Account Group Aggregation"/>
+    </Parent>
+    </TaskDefinition>
+
+    <!-- Task AccountAggregation OpenLDAP -->
+    <TaskDefinition created="1706287999732" formPath="/monitor/tasks/accountAggregationTask.xhtml" name="Custom-TaskDefinition-AccountAggregation-OpenLDAP" resultAction="Rename" subType="task_item_type_acct_aggregation" type="AccountAggregation">
+    <Attributes>
+        <Map>
+        <entry key="TaskSchedule.host"/>
+        <entry key="applications" value="OpenLDAP"/>
+        <entry key="checkDeleted" value="true"/>
+        <entry key="checkHistory" value="false"/>
+        <entry key="checkPolicies" value="false"/>
+        <entry key="correlateEntitlements" value="false"/>
+        <entry key="correlateOnly" value="true"/>
+        <entry key="correlateScope" value="false"/>
+        <entry key="deltaAggregation" value="false"/>
+        <entry key="enablePartitioning" value="false"/>
+        <entry key="haltOnMaxError" value="false"/>
+        <entry key="noAutoCreateApplications" value="false"/>
+        <entry key="noAutoCreateScopes" value="false"/>
+        <entry key="noNeedsRefresh" value="false"/>
+        <entry key="noOptimizeReaggregation" value="false"/>
+        <entry key="promoteManagedAttributes" value="false"/>
+        <entry key="refreshScorecard" value="false"/>
+        <entry key="sequential" value="false"/>
+        <entry key="taskCompletionEmailNotify" value="Disabled"/>
+        <entry key="taskCompletionEmailRecipients"/>
+        <entry key="taskCompletionEmailTemplate"/>
+        </Map>
+    </Attributes>
+    <Description>Task template for application account scanning.</Description>
+    <Owner>
+        <Reference class="sailpoint.object.Identity" id="ac1200068d461f92818d46afcd2400ff" name="spadmin"/>
+    </Owner>
+    <Parent>
+        <Reference class="sailpoint.object.TaskDefinition" id="ac1200068d461f92818d46afe22301bd" name="Account Aggregation"/>
+    </Parent>
+    </TaskDefinition>
+
+</sailpoint>

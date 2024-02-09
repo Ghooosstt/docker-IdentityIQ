@@ -15,10 +15,10 @@ if [ ! -e $CONTAINER_ALREADY_STARTED ]; then
     # Install Vim.
     apt-get install -y vim
 
-    # Update IIQ database config file.
+    # Update The IIQ database config file by replacing 'localhost' value by 'iiq-mysql'.
     sed -i 's/localhost/iiq-mysql/g' /usr/local/tomcat/webapps/identityiq/WEB-INF/classes/iiq.properties
 
-    # Update init file with mailslurper smtp server. In a custom war default smtp config is in 'init-default_org.xml' file, and for default package smtp config is in 'init.xml' file.
+    # Update init file with mailslurper smtp server. In a custom war, the default smtp config is in 'init-default_org.xml' file, and for default package smtp config is in 'init.xml' file.
     if [ "$IIQ_CUSTOM_WAR" = "yes" ]; then sed -i 's/mail.example.com/iiq-mailslurper/g' /usr/local/tomcat/webapps/identityiq/WEB-INF/config/init-default_org.xml; else sed -i 's/mail.example.com/iiq-mailslurper/g' /usr/local/tomcat/webapps/identityiq/WEB-INF/config/init.xml; fi
 
     # Setup iiq binary.
@@ -50,7 +50,10 @@ if [ ! -e $CONTAINER_ALREADY_STARTED ]; then
 
     # Import custom objects using iiq console.
     echo import custom files from identityiq-objects folder
-    echo "import /work/Custom-Objects-All.xml" | ./iiq console
+    echo "import /work/Custom-Rules.xml" | ./iiq console
+    echo "import /work/Custom-Applications.xml" | ./iiq console
+    echo "import /work/Custom-TaskDefinitions.xml" | ./iiq console
+    if [ "$IIQ_CUSTOM_WAR" != "yes" ]; then echo "import /work/Custom-ObjectConfigs.xml" | ./iiq console; fi
 
     # Start tomcat.
     catalina.sh run

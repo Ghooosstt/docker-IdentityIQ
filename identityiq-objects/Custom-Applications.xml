@@ -2,8 +2,134 @@
 <!DOCTYPE sailpoint PUBLIC "sailpoint.dtd" "sailpoint.dtd">
 <sailpoint>
 
+	<!-- HR File connector -->
+	<Application authoritative="true" connector="sailpoint.connector.DelimitedFileConnector" featuresString="DIRECT_PERMISSIONS, NO_RANDOM_ACCESS, DISCOVER_SCHEMA" icon="enterpriseIcon" name="HR File" profileClass="" type="DelimitedFile">
+	  <Attributes>
+		<Map>
+		  <entry key="PassphraseForPrivateKey"/>
+		  <entry key="PrivateKeyFilePath"/>
+		  <entry key="afterProvisioningRule"/>
+		  <entry key="beforeProvisioningRule"/>
+		  <entry key="compositeDefinition"/>
+		  <entry key="delimiter" value=","/>
+		  <entry key="file" value="/work/HR-file.csv"/>
+		  <entry key="fileEncoding" value="UTF-8"/>
+		  <entry key="filetransport" value="local"/>
+		  <entry key="filterEmptyRecords">
+			<value>
+			  <Boolean>true</Boolean>
+			</value>
+		  </entry>
+		  <entry key="ftpsAuthMethod" value="password"/>
+		  <entry key="ftpsClientCertificateFilePath"/>
+		  <entry key="ftpsClientCertificatePassphrase"/>
+		  <entry key="group.filetransport" value="local"/>
+		  <entry key="group.filterEmptyRecords">
+			<value>
+			  <Boolean>true</Boolean>
+			</value>
+		  </entry>
+		  <entry key="group.partitionMode" value="auto"/>
+		  <entry key="hasHeader">
+			<value>
+			  <Boolean>true</Boolean>
+			</value>
+		  </entry>
+		  <entry key="isCaseInsensitiveMerge">
+			<value>
+			  <Boolean></Boolean>
+			</value>
+		  </entry>
+		  <entry key="isSortedByIndexColumn">
+			<value>
+			  <Boolean></Boolean>
+			</value>
+		  </entry>
+		  <entry key="managerCorrelationFilter">
+			<value>
+			  <Filter operation="EQ" property="name" value="manager"/>
+			</value>
+		  </entry>
+		  <entry key="mergeRows">
+			<value>
+			  <Boolean></Boolean>
+			</value>
+		  </entry>
+		  <entry key="nativeChangeDetectionAttributeScope" value="entitlements"/>
+		  <entry key="nativeChangeDetectionAttributes"/>
+		  <entry key="nativeChangeDetectionEnabled">
+			<value>
+			  <Boolean></Boolean>
+			</value>
+		  </entry>
+		  <entry key="nativeChangeDetectionOperations"/>
+		  <entry key="parseType" value="delimited"/>
+		  <entry key="partitionMode" value="auto"/>
+		  <entry key="port"/>
+		  <entry key="sftpAuthMethod" value="password"/>
+		  <entry key="stopIfLineHasWrongColumnLength">
+			<value>
+			  <Boolean></Boolean>
+			</value>
+		  </entry>
+		  <entry key="sysDescriptions">
+			<value>
+			  <Map>
+				<entry key="en_US"/>
+			  </Map>
+			</value>
+		  </entry>
+		  <entry key="templateApplication" value="DelimitedFile Template"/>
+		</Map>
+	  </Attributes>
+	  <Owner>
+		<Reference class="sailpoint.object.Identity" name="spadmin"/>
+	  </Owner>
+	  <Schemas>
+		<Schema displayAttribute="uid" identityAttribute="uid" instanceAttribute="" nativeObjectType="account" objectType="account" permissionsRemediationModificationType="None">
+      <AttributeDefinition name="uid" type="string">
+        <Description></Description>
+      </AttributeDefinition>
+      <AttributeDefinition name="firstname" type="string">
+        <Description></Description>
+      </AttributeDefinition>
+      <AttributeDefinition name="lastname" type="string">
+        <Description></Description>
+      </AttributeDefinition>
+      <AttributeDefinition name="displayName" type="string">
+        <Description></Description>
+      </AttributeDefinition>
+      <AttributeDefinition name="email" type="string">
+        <Description></Description>
+      </AttributeDefinition>
+      <AttributeDefinition name="phoneNumber" type="string">
+        <Description></Description>
+      </AttributeDefinition>
+      <AttributeDefinition name="manager" type="string">
+        <Description></Description>
+      </AttributeDefinition>
+      <AttributeDefinition name="type" type="string">
+        <Description></Description>
+      </AttributeDefinition>
+      <AttributeDefinition name="country" type="string">
+        <Description></Description>
+      </AttributeDefinition>
+      <AttributeDefinition name="city" type="string">
+        <Description></Description>
+      </AttributeDefinition>
+      <AttributeDefinition name="endDate" type="string">
+        <Description></Description>
+      </AttributeDefinition>
+		</Schema>
+	  </Schemas>
+	  <ApplicationScorecard/>
+	</Application>
+
     <!-- OpenLDAP connector -->
-    <Application authoritative="true" connector="sailpoint.connector.LDAPConnector" featuresString="AUTHENTICATE, PROVISIONING, SYNC_PROVISIONING, PASSWORD, MANAGER_LOOKUP, SEARCH" icon="directory2Icon" name="OpenLDAP" profileClass="" type="OpenLDAP - Direct">
+    <Application connector="sailpoint.connector.LDAPConnector" featuresString="AUTHENTICATE, PROVISIONING, SYNC_PROVISIONING, PASSWORD, MANAGER_LOOKUP, SEARCH" icon="directory2Icon" name="OpenLDAP" profileClass="" type="OpenLDAP - Direct">
+    <AccountCorrelationConfig>
+      <Reference class="sailpoint.object.CorrelationConfig" name="Custom-OpenLDAP-Correlation"/>
+    </AccountCorrelationConfig>
     <Attributes>
         <Map>
         <entry key="LDAPApplicationVersion" value="2.0"/>
@@ -92,22 +218,100 @@
           <Section>
             <Field displayName="con_prov_policy_ldap_user_DN" helpKey="help_con_prov_policy_ldap_user_DN" name="dn" required="true" type="string">
               <Script>
-                <Source>return "uid=" + identity.getFirstname() + "." + identity.getLastname() + ",ou=People,dc=my-company,dc=com";</Source>
+                <Source><![CDATA[
+                  return "uid=" + identity.getFirstname() + "." + identity.getLastname() + ",ou=People,dc=my-company,dc=com";
+                  ]]>
+                </Source>
               </Script>
             </Field>
             <Field displayName="con_prov_policy_ldap_full_name" helpKey="help_con_prov_policy_ldap_full_name" name="cn" required="true" type="string">
               <Script>
-                <Source>return identity.getFirstname() + " " + identity.getLastname();</Source>
+                <Source><![CDATA[
+                  return identity.getFirstname() + " " + identity.getLastname();
+                  ]]></Source>
               </Script>
             </Field>
             <Field displayName="con_prov_policy_ldap_first_name" helpKey="help_con_prov_policy_ldap_first_name" name="givenName" type="string">
               <Script>
-                <Source>return identity.getFirstname();</Source>
+                <Source><![CDATA[
+                  return identity.getFirstname();
+                  ]]>
+                </Source>
               </Script>
             </Field>
             <Field displayName="con_prov_policy_ldap_last_name" helpKey="help_con_prov_policy_ldap_last_name" name="sn" required="true" type="string">
               <Script>
-                <Source>return identity.getLastname();</Source>
+                <Source><![CDATA[
+                  return identity.getLastname();
+                  ]]>
+                </Source>
+              </Script>
+            </Field>
+            <Field displayName="uid" name="uid" required="true" type="string">
+              <Script>
+                <Source><![CDATA[
+                  return identity.getFirstname() + "." + identity.getLastname();
+                  ]]>
+                </Source>
+              </Script>
+            </Field>
+            <Field displayName="Mail" name="mail" type="string">
+              <Script>
+                <Source><![CDATA[
+                  return identity.getAttribute("email");
+                  ]]>
+                </Source>
+              </Script>
+            </Field>
+            <Field displayName="Telephone Number" name="telephoneNumber" type="string">
+              <Script>
+                <Source><![CDATA[
+                  return identity.getAttribute("phoneNumber");
+                  ]]>
+                </Source>
+              </Script>
+            </Field>
+            <Field displayName="Manager" name="manager" type="string">
+              <Script>
+                <Source><![CDATA[
+                  import sailpoint.object.Identity;
+                  import sailpoint.object.Link;
+                  import sailpoint.object.Application;
+
+                  Identity manager = identity.getManager();
+                  if (manager != null)
+                  {
+                    List links = manager.getLinks();
+                    if (links != null)
+                    {
+                      Application openLdap = context.getObjectByName(Application.class, "OpenLDAP");
+                      for (Link link : links)
+                      {
+                        if (openLdap.equals(link.getApplication()))
+                        {
+                          return link.getNativeIdentity();
+                        }
+                      }
+                    }
+                  }
+                  ]]>
+                </Source>
+              </Script>
+            </Field>
+            <Field displayName="Employee Number" name="employeeNumber" type="string">
+              <Script>
+                <Source><![CDATA[
+                  return identity.getName();
+                  ]]>
+                </Source>
+              </Script>
+            </Field>
+            <Field displayName="Employee Type" name="employeeType" type="string">
+              <Script>
+                <Source><![CDATA[
+                  return identity.getAttribute("type");
+                  ]]>
+                </Source>
               </Script>
             </Field>
           </Section>
@@ -119,19 +323,102 @@
             </Map>
           </Attributes>
           <Section>
+            <Field displayName="con_prov_policy_ldap_user_DN" helpKey="help_con_prov_policy_ldap_user_DN" name="dn" required="true" type="string">
+              <Script>
+                <Source><![CDATA[
+                  return "uid=" + identity.getFirstname() + "." + identity.getLastname() + ",ou=People,dc=my-company,dc=com";
+                  ]]>
+                </Source>
+              </Script>
+            </Field>
             <Field displayName="con_prov_policy_ldap_full_name" helpKey="help_con_prov_policy_ldap_full_name" name="cn" required="true" type="string">
               <Script>
-                <Source>return identity.getFirstname() + " " + identity.getLastname();</Source>
+                <Source><![CDATA[
+                  return identity.getFirstname() + " " + identity.getLastname();
+                  ]]></Source>
               </Script>
             </Field>
             <Field displayName="con_prov_policy_ldap_first_name" helpKey="help_con_prov_policy_ldap_first_name" name="givenName" type="string">
               <Script>
-                <Source>return identity.getFirstname();</Source>
+                <Source><![CDATA[
+                  return identity.getFirstname();
+                  ]]>
+                </Source>
               </Script>
             </Field>
             <Field displayName="con_prov_policy_ldap_last_name" helpKey="help_con_prov_policy_ldap_last_name" name="sn" required="true" type="string">
               <Script>
-                <Source>return identity.getLastname();</Source>
+                <Source><![CDATA[
+                  return identity.getLastname();
+                  ]]>
+                </Source>
+              </Script>
+            </Field>
+            <Field displayName="uid" name="uid" required="true" type="string">
+              <Script>
+                <Source><![CDATA[
+                  return identity.getFirstname() + "." + identity.getLastname();
+                  ]]>
+                </Source>
+              </Script>
+            </Field>
+            <Field displayName="Mail" name="mail" type="string">
+              <Script>
+                <Source><![CDATA[
+                  return identity.getAttribute("email");
+                  ]]>
+                </Source>
+              </Script>
+            </Field>
+            <Field displayName="Telephone Number" name="telephoneNumber" type="string">
+              <Script>
+                <Source><![CDATA[
+                  return identity.getAttribute("phoneNumber");
+                  ]]>
+                </Source>
+              </Script>
+            </Field>
+            <Field displayName="Manager" name="manager" type="string">
+              <Script>
+                <Source><![CDATA[
+                  import sailpoint.object.Identity;
+                  import sailpoint.object.Link;
+                  import sailpoint.object.Application;
+
+                  Identity manager = identity.getManager();
+                  if (manager != null)
+                  {
+                    List links = manager.getLinks();
+                    if (links != null)
+                    {
+                      Application openLdap = context.getObjectByName(Application.class, "OpenLDAP");
+                      for (Link link : links)
+                      {
+                        if (openLdap.equals(link.getApplication()))
+                        {
+                          return link.getNativeIdentity();
+                        }
+                      }
+                    }
+                  }
+                  ]]>
+                </Source>
+              </Script>
+            </Field>
+            <Field displayName="Employee Number" name="employeeNumber" type="string">
+              <Script>
+                <Source><![CDATA[
+                  return identity.getName();
+                  ]]>
+                </Source>
+              </Script>
+            </Field>
+            <Field displayName="Employee Type" name="employeeType" type="string">
+              <Script>
+                <Source><![CDATA[
+                  return identity.getAttribute("type");
+                  ]]>
+                </Source>
               </Script>
             </Field>
           </Section>
@@ -438,101 +725,11 @@
     <ApplicationScorecard/>
     </Application>
 
-    <!-- Task AccountAggregation OpenLDAP -->
-    <TaskDefinition formPath="/monitor/tasks/accountAggregationTask.xhtml" name="Custom-TaskDefinition-AccountAggregation-OpenLDAP" resultAction="Rename" subType="task_item_type_acct_aggregation" type="AccountAggregation">
-    <Attributes>
-        <Map>
-        <entry key="TaskSchedule.host"/>
-        <entry key="applications" value="OpenLDAP"/>
-        <entry key="checkDeleted" value="true"/>
-        <entry key="checkHistory" value="false"/>
-        <entry key="checkPolicies" value="false"/>
-        <entry key="correlateEntitlements" value="false"/>
-        <entry key="correlateOnly" value="false"/>
-        <entry key="correlateScope" value="false"/>
-        <entry key="deltaAggregation" value="false"/>
-        <entry key="enablePartitioning" value="false"/>
-        <entry key="haltOnMaxError" value="false"/>
-        <entry key="noAutoCreateApplications" value="false"/>
-        <entry key="noAutoCreateScopes" value="false"/>
-        <entry key="noNeedsRefresh" value="false"/>
-        <entry key="noOptimizeReaggregation" value="false"/>
-        <entry key="promoteManagedAttributes" value="false"/>
-        <entry key="refreshScorecard" value="false"/>
-        <entry key="sequential" value="false"/>
-        <entry key="taskCompletionEmailNotify" value="Disabled"/>
-        <entry key="taskCompletionEmailRecipients"/>
-        <entry key="taskCompletionEmailTemplate"/>
-        </Map>
-    </Attributes>
-    <Description>Task template for application account scanning.</Description>
-    <Owner>
-        <Reference class="sailpoint.object.Identity" name="spadmin"/>
-    </Owner>
-    <Parent>
-        <Reference class="sailpoint.object.TaskDefinition" name="Account Aggregation"/>
-    </Parent>
-    </TaskDefinition>
-
-    <!-- Task AccountGroupAggregation OpenLDAP -->
-    <TaskDefinition formPath="/monitor/tasks/accountGroupAggregationTask.xhtml" name="Custom-TaskDefinition-AccountGroupAggregation-OpenLDAP" resultAction="Rename" subType="task_item_type_acct_grp_aggregation" type="AccountGroupAggregation">
-    <Attributes>
-        <Map>
-        <entry key="TaskSchedule.host"/>
-        <entry key="aggregationType" value="group"/>
-        <entry key="applications" value="OpenLDAP"/>
-        <entry key="checkDeleted" value="true"/>
-        <entry key="deltaAggregation" value="false"/>
-        <entry key="enablePartitioning" value="false"/>
-        <entry key="groupSchema"/>
-        <entry key="haltOnMaxError" value="false"/>
-        <entry key="promoteClassifications" value="false"/>
-        <entry key="taskCompletionEmailNotify" value="Disabled"/>
-        <entry key="taskCompletionEmailRecipients"/>
-        <entry key="taskCompletionEmailTemplate"/>
-        </Map>
-    </Attributes>
-    <Description>Task template for application group scanning.</Description>
-    <Owner>
-        <Reference class="sailpoint.object.Identity" name="spadmin"/>
-    </Owner>
-    <Parent>
-        <Reference class="sailpoint.object.TaskDefinition" name="Account Group Aggregation"/>
-    </Parent>
-    </TaskDefinition>
-
-  <!-- ObjectConfig Identity (merge option) -->
-  <ImportAction name="merge">
-    <ObjectConfig name="Identity">
-        <ObjectAttribute displayName="att_display_name" editMode="ReadOnly" name="displayName" standard="true" type="string">
-            <AttributeSource name="cn">
-            <ApplicationRef>
-                <Reference class="sailpoint.object.Application" name="OpenLDAP"/>
-            </ApplicationRef>
-            </AttributeSource>
-        </ObjectAttribute>
-        <ObjectAttribute displayName="att_last_name" editMode="ReadOnly" name="lastname" standard="true" type="string">
-            <AttributeSource name="sn">
-            <ApplicationRef>
-                <Reference class="sailpoint.object.Application" name="OpenLDAP"/>
-            </ApplicationRef>
-            </AttributeSource>
-        </ObjectAttribute>
-        <ObjectAttribute displayName="att_email" editMode="ReadOnly" name="email" standard="true" type="string">
-            <AttributeSource name="mail">
-            <ApplicationRef>
-                <Reference class="sailpoint.object.Application" name="OpenLDAP"/>
-            </ApplicationRef>
-            </AttributeSource>
-        </ObjectAttribute>
-        <ObjectAttribute displayName="att_first_name" editMode="ReadOnly" name="firstname" standard="true" type="string">
-            <AttributeSource name="givenName">
-            <ApplicationRef>
-                <Reference class="sailpoint.object.Application" name="OpenLDAP"/>
-            </ApplicationRef>
-            </AttributeSource>
-        </ObjectAttribute>
-    </ObjectConfig>
-  </ImportAction>
+    <!-- CorrelationConfig for OpenLDAP connector -->
+    <CorrelationConfig name="Custom-OpenLDAP-Correlation">
+        <AttributeAssignments>
+            <Filter operation="EQ" property="name" value="employeeNumber"/>
+        </AttributeAssignments>
+    </CorrelationConfig>
 
 </sailpoint>

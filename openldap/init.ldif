@@ -11,38 +11,45 @@ objectClass: organizationalUnit
 ou: Group
 
 # Add John Smith to the organization
-dn: uid=jsmith1,ou=People,dc=my-company,dc=com
+dn: uid=john.smith,ou=People,dc=my-company,dc=com
 changetype: add
 objectClass: inetOrgPerson
 description: John Smith from Accounting. John is the project manager of the building project, so contact him with any questions.
 cn: John Smith
 givenName: John
 sn: Smith
-uid: jsmith1
+uid: john.smith
 mail: john.smith@my-company.com
+telephoneNumber: +33611223344
+employeeNumber: 00000001
+employeeType: internal
 
 # Add Sally Brown to the organization
-dn: uid=sbrown20,ou=People,dc=my-company,dc=com
+dn: uid=sally.brown,ou=People,dc=my-company,dc=com
 changetype: add
 objectClass: inetOrgPerson
 description: Sally Brown from engineering. Sally is responsible for designing the blue prints and testing the structural integrity of the design.
 cn: Sally Brown
 givenName: Sally
 sn: Brown
-uid: sbrown20
+uid: sally.brown
 mail: sally.brown@my-company.com
+telephoneNumber: +33655667788
+manager: uid=john.smith,ou=People,dc=my-company,dc=com
+employeeNumber: 00000002
+employeeType: internal
 
 # Create group Engineer
 dn: cn=Engineer,ou=Group,dc=my-company,dc=com
 changetype: add
 objectclass: groupOfUniqueNames
 cn: Engineer
-uniquemember: uid=sbrown20,ou=People,dc=my-company,dc=com
+uniquemember: uid=john.smith,ou=People,dc=my-company,dc=com
 
 # Create group Office Access
 dn: cn=Office Access,ou=Group,dc=my-company,dc=com
 changetype: add
 objectclass: groupOfUniqueNames
 cn: Office Access
-uniquemember: uid=jsmith1,ou=People,dc=my-company,dc=com
-uniquemember: uid=sbrown20,ou=People,dc=my-company,dc=com
+uniquemember: uid=john.smith,ou=People,dc=my-company,dc=com
+uniquemember: uid=sally.brown,ou=People,dc=my-company,dc=com

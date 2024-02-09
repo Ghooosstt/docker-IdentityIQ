@@ -1,0 +1,124 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE sailpoint PUBLIC "sailpoint.dtd" "sailpoint.dtd">
+<sailpoint>
+
+  <!-- ObjectConfig Identity (merge option) -->
+  <ImportAction name="merge">
+    <ObjectConfig name="Identity">
+        <ObjectAttribute displayName="att_display_name" editMode="ReadOnly" name="displayName" standard="true" type="string">
+            <AttributeSource name="displayName">
+            <ApplicationRef>
+                <Reference class="sailpoint.object.Application" name="HR File"/>
+            </ApplicationRef>
+            </AttributeSource>
+        </ObjectAttribute>
+        <ObjectAttribute displayName="att_email" editMode="ReadOnly" name="email" standard="true" type="string">
+            <AttributeSource name="email">
+            <ApplicationRef>
+                <Reference class="sailpoint.object.Application" name="HR File"/>
+            </ApplicationRef>
+            </AttributeSource>
+        </ObjectAttribute>
+        <ObjectAttribute displayName="att_first_name" editMode="ReadOnly" name="firstname" standard="true" type="string">
+            <AttributeSource name="firstname">
+            <ApplicationRef>
+                <Reference class="sailpoint.object.Application" name="HR File"/>
+            </ApplicationRef>
+            </AttributeSource>
+        </ObjectAttribute>
+        <ObjectAttribute displayName="att_last_name" editMode="ReadOnly" name="lastname" standard="true" type="string">
+            <AttributeSource name="lastname">
+            <ApplicationRef>
+                <Reference class="sailpoint.object.Application" name="HR File"/>
+            </ApplicationRef>
+            </AttributeSource>
+        </ObjectAttribute>
+        <ObjectAttribute displayName="att_manager" editMode="ReadOnly" groupFactory="true" name="manager" standard="true" type="sailpoint.object.Identity">
+            <AttributeSource name="manager">
+            <ApplicationRef>
+                <Reference class="sailpoint.object.Application" name="HR File"/>
+            </ApplicationRef>
+            </AttributeSource>
+        </ObjectAttribute>
+        <ObjectAttribute displayName="att_identity_type" editMode="ReadOnly" name="type" standard="true" type="string">
+            <AttributeSource name="type">
+            <ApplicationRef>
+                <Reference class="sailpoint.object.Application" name="HR File"/>
+            </ApplicationRef>
+            </AttributeSource>
+        </ObjectAttribute>
+        <ObjectAttribute displayName="Phone Number" editMode="ReadOnly" name="phoneNumber" type="string">
+            <AttributeSource name="phoneNumber">
+            <ApplicationRef>
+                <Reference class="sailpoint.object.Application" name="HR File"/>
+            </ApplicationRef>
+            </AttributeSource>
+        </ObjectAttribute>
+        <ObjectAttribute displayName="Country" editMode="ReadOnly" name="country" type="string">
+            <AttributeSource name="country">
+            <ApplicationRef>
+                <Reference class="sailpoint.object.Application" name="HR File"/>
+            </ApplicationRef>
+            </AttributeSource>
+        </ObjectAttribute>
+        <ObjectAttribute displayName="City" editMode="ReadOnly" name="city" type="string">
+            <AttributeSource name="city">
+            <ApplicationRef>
+                <Reference class="sailpoint.object.Application" name="HR File"/>
+            </ApplicationRef>
+            </AttributeSource>
+        </ObjectAttribute>
+        <ObjectAttribute displayName="End Date" editMode="ReadOnly" name="endDate" type="string">
+            <AttributeSource name="endDate">
+            <ApplicationRef>
+                <Reference class="sailpoint.object.Application" name="HR File"/>
+            </ApplicationRef>
+            </AttributeSource>
+        </ObjectAttribute>
+        <ObjectAttribute displayName="att_inactive" editMode="ReadOnly" name="inactive" standard="true" type="boolean">
+            <AttributeSource name="AppRule: Custom-Rule-inactive HR File">
+            <ApplicationRef>
+                <Reference class="sailpoint.object.Application" name="HR File"/>
+            </ApplicationRef>
+            <RuleRef>
+                <Reference class="sailpoint.object.Rule" name="Custom-Rule-inactive"/>
+            </RuleRef>
+            </AttributeSource>
+        </ObjectAttribute>
+    </ObjectConfig>
+  </ImportAction>
+
+  <!-- UIConfig (merge option) -->
+  <ImportAction name="merge">
+    <UIConfig name="UIConfig">
+        <Attributes>
+        <Map>
+            <entry key="identityViewAttributes" value="name,firstname,lastname,displayName,email,phoneNumber,manager,type,country,city,endDate,inactive"/>
+        </Map>
+        </Attributes>
+    </UIConfig>
+  </ImportAction>
+
+  <!-- Configuration SystemConfiguration (merge option) -->
+  <ImportAction name="merge">
+    <Configuration name="SystemConfiguration">
+        <Attributes>
+        <Map>
+            <entry key="enableProvisioningTransactionLog">
+                <value>
+                    <Boolean>true</Boolean>
+                </value>
+            </entry>
+            <entry key="provisioningTransactionLogLevel" value="Success"/>
+            <entry key="enableSyslog">
+                <value>
+                    <Boolean>true</Boolean>
+                </value>
+            </entry>
+            <entry key="syslogLevel" value="WARN"/>
+        </Map>
+        </Attributes>
+    </Configuration>
+  </ImportAction>
+
+</sailpoint>

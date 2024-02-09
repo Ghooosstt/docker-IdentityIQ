@@ -15,7 +15,11 @@ RUN apt-get install -y unzip
 COPY identityiq-${IIQ_VERSION}.zi* identityiq-${IIQ_VERSION}${IIQ_PATCH}.ja* identityiq.wa* ./
 
 # Get Custom IIQ objects from host in the 'identityiq-objects' folder and copy them into the image.
-COPY identityiq-objects/Custom-Objects-All.xml ./
+COPY identityiq-objects/Custom-Rules.xml ./
+COPY identityiq-objects/Custom-Applications.xml ./
+COPY identityiq-objects/Custom-TaskDefinitions.xml ./
+COPY identityiq-objects/Custom-ObjectConfigs.xml ./
+COPY identityiq-objects/HR-file.csv ./
 
 # If IIQ_CUSTOM_WAR is NOT set to yes, remove custom identityiq.war if the file is present and unzip identityiq-<version>.zip to get default war file.
 # Else if IIQ_CUSTOM_WAR is set to yes, remove identityiq.zip file and patch.jar if they are present in order to reduce the image size.
