@@ -68,7 +68,7 @@
     </TaskDefinition>
 
     <!-- Task AccountAggregation OpenLDAP -->
-    <TaskDefinition created="1706287999732" formPath="/monitor/tasks/accountAggregationTask.xhtml" name="Custom-TaskDefinition-AccountAggregation-OpenLDAP" resultAction="Rename" subType="task_item_type_acct_aggregation" type="AccountAggregation">
+    <TaskDefinition formPath="/monitor/tasks/accountAggregationTask.xhtml" name="Custom-TaskDefinition-AccountAggregation-OpenLDAP" resultAction="Rename" subType="task_item_type_acct_aggregation" type="AccountAggregation">
     <Attributes>
         <Map>
         <entry key="TaskSchedule.host"/>
@@ -96,10 +96,10 @@
     </Attributes>
     <Description>Task template for application account scanning.</Description>
     <Owner>
-        <Reference class="sailpoint.object.Identity" id="ac1200068d461f92818d46afcd2400ff" name="spadmin"/>
+        <Reference class="sailpoint.object.Identity" name="spadmin"/>
     </Owner>
     <Parent>
-        <Reference class="sailpoint.object.TaskDefinition" id="ac1200068d461f92818d46afe22301bd" name="Account Aggregation"/>
+        <Reference class="sailpoint.object.TaskDefinition" name="Account Aggregation"/>
     </Parent>
     </TaskDefinition>
 
