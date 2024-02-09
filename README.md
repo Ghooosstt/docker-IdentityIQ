@@ -41,17 +41,17 @@ After that, the iiq-tomcat container will launch tomcat server after each start.
 ## Informations
 
 The IdentityIQ server is available at [http://localhost:8080/identityiq/](http://localhost:8080/identityiq/).
-* Admin user: spadmin
-* Admin password: admin
+* **Admin user:** spadmin
+* **Admin password:** admin
 
 The MySQL server listens on port **3306** and is accessible through the phpMyAdmin container at [http://localhost:8070](http://localhost:8070).
-* Admin user: root
-* Admin password: root
+* **Admin user:** root
+* **Admin password:** root
 
 The OpenLDAP server listens on port **389** and is accessible through the phpLDAPadmin container at [https://localhost:6443](https://localhost:6443).
+* **Admin user:** cn=admin,dc=my-company,dc=com
+* **Admin password:** root
 * LDAP domain: my-company.com
-* Admin user: cn=admin,dc=my-company,dc=com
-* Admin password: root
 
 The MailSlurper server listens on port **25** and the emails are visible at [http://localhost:8090](http://localhost:8090).
 
@@ -79,6 +79,16 @@ To remove the containers, use the command `docker-compose down`.
 
 To recreate the containers, use the command `docker-compose up`.
 
+## Reset the environment
+
+If you want to deploy another IdentityIQ version, another patch version, or another custom war, you must:
+1. Edit the **.env** file with the new version.
+2. Execute the **reset_containers.bat** or **reset_containers.sh** scripts.
+3. Rebuild the iiq-tomcat image without cache using `docker-compose build --no-cache`.
+4. Recreate the containers using `docker-compose up`.
+
+**WARNING, this action will delete your containers and all the data they contain.**
+
 ## Backup volumes data
 
 If you need to send your containers data to another host, or if you want to backup your volumes data. You can use the `volumes_backup.bat` script for Windows or `volumes_backup.sh` script for Linux.
@@ -91,24 +101,9 @@ These scripts will generate a tar archive of MySQL and OpenLDAP containers data.
 
 Place the backup tar archives in the root of this directory, and use the `volumes_restore.bat` script for Windows or `volumes_backup.sh` script for Linux.
 
-- **The iiq-tomcat container must be in the same version as the MySQL backup.**
+- **The iiq-tomcat container must be in the same version as the MySQL backup.** (*As the `volumes_backup` script performs a backup of the entire database, it is not possible to backup the data, upgrade the IIQ version, then restore the backup, because the IdentityIQ schema version will be the version retrieved during backup.*)
+
 - **Your containers must exist and must be stopped.**
-
-## Update version
-
-If you want to deploy another custom war, another IdentityIQ version or another patch version, you must:
-1. Edit the **.env** file with the new version.
-2. Remove the current containers using `docker-compose down`.
-3. Clean the old volumes using `docker volume prune`.
-4. Remove the image **docker-identityiq_tomcat** using `docker image rm docker-identityiq_tomcat`.
-5. Rebuild the iiq-tomcat image using `docker-compose build --no-cache`.
-6. Recreate the containers using `docker-compose up`.
-
-**WARNING, this action will delete your containers and all the data they contain.**
-
-- *Step 2 to step 4 can be automated using **reset_containers.bat** or **reset_containers.sh** scripts.*
-
-- *As the `volumes_backup` script performs a backup of the entire database, it is not possible to backup the data, upgrade the IIQ version, then restore the backup, because the IdentityIQ schema version will be the version retrieved during backup.*
 
 # Contribution
 
