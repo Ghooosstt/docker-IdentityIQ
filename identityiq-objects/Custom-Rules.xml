@@ -83,4 +83,121 @@
     </Rule>
 
 
+    <!-- Rule IdentityCreation -->
+    <Rule language="beanshell" name="Custom-Rule-IdentityCreation" type="IdentityCreation">
+    <Description>Identity creation rules are used to set attributes on new Identity objects when they are created.  New identities may be created during the aggregation of application accounts, or optionally created after pass-through authentication.
+
+    One common operation is to change the name property of the identity when the default application name is complex (such as a directory DN).
+
+    Another common operation is to assign a set of initial capabilities based on the attributes pulled from the application account.</Description>
+    <Signature returnType="void">
+        <Inputs>
+        <Argument name="log" type="org.apache.commons.logging.Log">
+            <Description>
+            The log object associated with the SailPointContext.
+            </Description>
+        </Argument>
+        <Argument name="context" type="sailpoint.api.SailPointContext">
+            <Description>
+            A sailpoint.api.SailPointContext object that can be used to query the database if necessary.
+            </Description>
+        </Argument>
+        <Argument name="environment" type="Map">
+            <Description>
+            Arguments passed to the aggregation task.
+            </Description>
+        </Argument>
+        <Argument name="application">
+            <Description>
+            Application being aggregated.
+            </Description>
+        </Argument>
+        <Argument name="account" type="ResourceObject">
+            <Description>
+            The resource account for the identity being created.
+            </Description>
+        </Argument>
+        <Argument name="identity" type="Identity">
+            <Description>
+            The identity that is being created.
+            </Description>
+        </Argument>
+        </Inputs>
+    </Signature>
+    <Source><![CDATA[
+        identity.setPassword("xyzzy");
+        ]]></Source>
+    </Rule>
+
+
+    <!-- Rule Create Role model -->
+    <Rule language="beanshell" name="Custom-Rule-CreateRoleModel">
+    <Description>
+        This rule create the role model.
+        </Description>
+    <Source><![CDATA[
+    import sailpoint.object.Bundle;
+    import sailpoint.object.QueryOptions;
+    import sailpoint.object.Filter;
+    import sailpoint.object.ManagedAttribute;
+    import sailpoint.object.Profile;
+    import sailpoint.object.Application;
+
+    Application openLDAP = context.getObjectByName(Application.class, "OpenLDAP");
+
+    // Create organizationals bundles
+    Bundle itRolesOrga = new Bundle();
+    itRolesOrga.setName("itRoles");
+    itRolesOrga.setDisplayName("IT Roles");
+    itRolesOrga.setType("organizational");
+    context.saveObject(itRolesOrga);
+
+    Bundle businessRolesOrga = new Bundle();
+    businessRolesOrga.setName("businessRoles");
+    businessRolesOrga.setDisplayName("Business Roles");
+    businessRolesOrga.setType("organizational");
+    context.saveObject(businessRolesOrga);
+
+    // Create IT role and Business role for each OpenLDAP group
+    QueryOptions qo = new QueryOptions();
+    qo.addFilter(Filter.eq("application.name", "OpenLDAP"));
+    qo.addFilter(Filter.eq("type", "group"));
+    Iterator it = context.search(ManagedAttribute.class, qo);
+    while (it.hasNext())
+    {
+        ManagedAttribute ma = it.next();
+        String cnRole = ma.getAttribute("cn");
+        String dnValue = ma.getValue();
+
+        // Build IT Role
+        Bundle itRole = new Bundle();
+        itRole.setName(cnRole + "-IT");
+        itRole.setDisplayName(cnRole + "-IT");
+        itRole.setType("it");
+        itRole.addInheritance(itRolesOrga);
+        // Build profile
+        Profile profile = new Profile();
+        profile.setApplication(openLDAP);
+        ArrayList constraintsValue = new ArrayList();
+        constraintsValue.add(dnValue);
+        Filter constraintFilter = Filter.containsAll("memberOf", constraintsValue);
+        profile.addConstraint(constraintFilter);
+        // Add the profile (entitlement constraint) in the IT role
+        itRole.add(profile);
+        context.saveObject(itRole);
+
+        // Build Business Role
+        Bundle businessRole = new Bundle();
+        businessRole.setName(cnRole);
+        businessRole.setDisplayName(cnRole);
+        businessRole.setType("business");
+        businessRole.addRequirement(itRole);
+        businessRole.addInheritance(businessRolesOrga);
+        context.saveObject(businessRole);
+    }
+
+    context.commitTransaction();
+    ]]></Source>
+    </Rule>
+
 </sailpoint>

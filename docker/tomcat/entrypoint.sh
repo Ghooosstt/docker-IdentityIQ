@@ -48,11 +48,12 @@ if [ ! -e $CONTAINER_ALREADY_STARTED ]; then
     # Launch iiq patch command if the IIQ_PATCH variable environment is set.
     if [ ! -z "$IIQ_PATCH" ]; then ./iiq patch $IIQ_VERSION$IIQ_PATCH; fi
 
-    # Import custom objects using iiq console.
+    # Import custom objects using the iiq console.
     echo import custom files from identityiq-objects folder
     echo "import /work/Custom-Rules.xml" | ./iiq console
     echo "import /work/Custom-Applications.xml" | ./iiq console
     echo "import /work/Custom-TaskDefinitions.xml" | ./iiq console
+    # We don't import ObjectConfigs if there is a custom war as this may erase some configurations from the custom war file.
     if [ "$IIQ_CUSTOM_WAR" != "yes" ]; then echo "import /work/Custom-ObjectConfigs.xml" | ./iiq console; fi
 
     # Start tomcat.

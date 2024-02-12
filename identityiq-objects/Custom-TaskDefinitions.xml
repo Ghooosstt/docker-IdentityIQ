@@ -67,6 +67,7 @@
     </Parent>
     </TaskDefinition>
 
+
     <!-- Task AccountAggregation OpenLDAP -->
     <TaskDefinition formPath="/monitor/tasks/accountAggregationTask.xhtml" name="Custom-TaskDefinition-AccountAggregation-OpenLDAP" resultAction="Rename" subType="task_item_type_acct_aggregation" type="AccountAggregation">
     <Attributes>
@@ -100,6 +101,50 @@
     </Owner>
     <Parent>
         <Reference class="sailpoint.object.TaskDefinition" name="Account Aggregation"/>
+    </Parent>
+    </TaskDefinition>
+
+
+    <!-- Task CreateRoleModel -->
+    <TaskDefinition name="Custom-TaskDefinition-CreateRoleModel" resultAction="Rename" subType="task_item_type_generic" type="Generic">
+    <Attributes>
+        <Map>
+        <entry key="TaskSchedule.host"/>
+        <entry key="ruleName" value="Custom-Rule-CreateRoleModel"/>
+        <entry key="taskCompletionEmailNotify" value="Disabled"/>
+        <entry key="taskCompletionEmailRecipients"/>
+        <entry key="taskCompletionEmailTemplate"/>
+        </Map>
+    </Attributes>
+    <Description>A task that can be used to run an arbitrary rule.</Description>
+    <Owner>
+        <Reference class="sailpoint.object.Identity" name="spadmin"/>
+    </Owner>
+    <Parent>
+        <Reference class="sailpoint.object.TaskDefinition" name="Run Rule"/>
+    </Parent>
+    </TaskDefinition>
+
+
+    <!-- Task Init Environment -->
+    <TaskDefinition formPath="/monitor/tasks/sequentialTask.xhtml" name="Custom-TaskDefinition-Init-Environment" resultAction="Rename" subType="task_item_type_generic" type="Generic">
+    <Attributes>
+        <Map>
+        <entry key="TaskSchedule.host"/>
+        <entry key="exitOnError" value="false"/>
+        <entry key="taskCompletionEmailNotify" value="Disabled"/>
+        <entry key="taskCompletionEmailRecipients"/>
+        <entry key="taskCompletionEmailTemplate"/>
+        <entry key="taskList" value="Custom-TaskDefinition-AccountAggregation-HRFile, Custom-TaskDefinition-AccountGroupAggregation-OpenLDAP, Custom-TaskDefinition-AccountAggregation-OpenLDAP, Custom-TaskDefinition-CreateRoleModel, Full Text Index Refresh, Refresh Identity Cube"/>
+        <entry key="trace" value="false"/>
+        </Map>
+    </Attributes>
+    <Description>This task init the environment.</Description>
+    <Owner>
+        <Reference class="sailpoint.object.Identity" name="spadmin"/>
+    </Owner>
+    <Parent>
+        <Reference class="sailpoint.object.TaskDefinition" name="Sequential Task Launcher"/>
     </Parent>
     </TaskDefinition>
 
