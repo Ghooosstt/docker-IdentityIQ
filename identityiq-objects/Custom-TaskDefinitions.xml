@@ -45,6 +45,7 @@
     <Attributes>
         <Map>
         <entry key="TaskSchedule.host"/>
+        <entry key="accountGroupRefreshRule" value="Custom-Rule-GroupAggregationRefresh-OpenLDAP"/>
         <entry key="aggregationType" value="group"/>
         <entry key="applications" value="OpenLDAP"/>
         <entry key="checkDeleted" value="true"/>

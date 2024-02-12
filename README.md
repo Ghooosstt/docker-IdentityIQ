@@ -36,7 +36,11 @@ At the first launch, the iiq-tomcat container will install mariadb client to com
 
 ![first-launch](https://user-images.githubusercontent.com/23320254/149496381-6e65d475-3312-4f7b-acbc-33131798ecf9.png)
   
-After that, the iiq-tomcat container will launch tomcat server after each start.
+After that, the iiq-tomcat container will launch the tomcat server after each start.
+
+Once your environment is up, you can initialize the data (identities, accounts, roles) by launching the **Custom-TaskDefinition-Init-Environment** task.
+
+![init-environment](https://github.com/EpiicDream/docker-IdentityIQ/assets/23320254/00baf226-79c3-4cfa-aca8-c31d2dcee161)
 
 ## Informations
 
