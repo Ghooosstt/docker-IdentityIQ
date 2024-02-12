@@ -9,7 +9,7 @@ Deploy a SailPoint IdentityIQ instance using Docker. This project use docker-com
 
 All theses services are connected through a network bridge.
 
-*Tested from IdentityIQ 8.1 without patch to IdentityIQ 8.3p2.*
+*Tested from IdentityIQ 8.1 to IdentityIQ 8.4.*
 
 ## Requirements
 
