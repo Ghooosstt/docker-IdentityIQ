@@ -32,13 +32,13 @@ To use this project, you must:
 
 3. Go to the root of this directory and run `docker-compose up`. This command will build the **docker-identityiq_tomcat** image and create all the containers.
 
-At the first launch, the iiq-tomcat container will install mariadb client to communicate with the mysql container, and run the *create_identityiq_tables-\<version\>.sql* script. Then it will run the iiq console, import init files, import custom objects if IIQ_CUSTOM_WAR option is set, patch the database if a patch is provided, and start the tomcat server.
+**At the first launch, the iiq-tomcat container will install mariadb client to communicate with the mysql container, and run the *create_identityiq_tables-\<version\>.sql* script. Then it will run the iiq console, import init files, import custom objects if IIQ_CUSTOM_WAR option is set, patch the database if a patch is provided, and start the tomcat server.**
 
 ![first-launch](https://user-images.githubusercontent.com/23320254/149496381-6e65d475-3312-4f7b-acbc-33131798ecf9.png)
   
 After that, the iiq-tomcat container will launch the tomcat server after each start.
 
-Once your environment is up, you can initialize the data (identities, accounts, roles) by launching the **Custom-TaskDefinition-Init-Environment** task.
+4. Once your environment is up, you can initialize the data (identities, accounts, roles) by launching the **Custom-TaskDefinition-Init-Environment** task.
 
 ![init-environment](https://github.com/EpiicDream/docker-IdentityIQ/assets/23320254/00baf226-79c3-4cfa-aca8-c31d2dcee161)
 
