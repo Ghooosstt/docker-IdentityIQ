@@ -57,6 +57,10 @@ The OpenLDAP server listens on port **389** and is accessible through the phpLDA
 * **Admin password:** root
 * LDAP domain: my-company.com
 
+You can access to the Tomcat administration page at [http://localhost:8080/manager/html](http://localhost:8080/manager/html).
+* **Admin user:** admin
+* **Admin password:** admin
+
 The MailSlurper server listens on port **25** and the emails are visible at [http://localhost:8090](http://localhost:8090).
 
 ## Communications between containers

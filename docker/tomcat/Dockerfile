@@ -5,8 +5,18 @@ ARG IIQ_CUSTOM_WAR
 ENV IIQ_VERSION=${IIQ_VERSION}
 ENV IIQ_PATCH=${IIQ_PATCH}
 ENV IIQ_CUSTOM_WAR=${IIQ_CUSTOM_WAR}
-WORKDIR /work
 
+# Fix tomcat 404 not found : https://github.com/docker-library/tomcat/issues/184
+WORKDIR /usr/local/tomcat/
+RUN mv webapps webapps2
+RUN mv webapps.dist/ webapps
+# Overwrite tomcat-users config to add admin user
+COPY docker/tomcat/tomcat-users.xml ./conf/tomcat-users.xml
+# Override context config to allow access to the manager and the host-manager pages
+COPY docker/tomcat/context.xml ./webapps/manager/META-INF/context.xml
+COPY docker/tomcat/context.xml ./webapps/host-manager/META-INF/context.xml
+
+WORKDIR /work
 # Install unzip tool
 RUN apt-get clean && apt-get autoclean && apt-get update
 RUN apt-get install -y unzip
