@@ -149,4 +149,26 @@
     </Parent>
     </TaskDefinition>
 
+    <!-- Task Full -->
+    <TaskDefinition formPath="/monitor/tasks/sequentialTask.xhtml" name="Custom-TaskDefinition-Full" resultAction="Rename" subType="task_item_type_generic" type="Generic">
+    <Attributes>
+        <Map>
+        <entry key="TaskSchedule.host"/>
+        <entry key="exitOnError" value="false"/>
+        <entry key="taskCompletionEmailNotify" value="Disabled"/>
+        <entry key="taskCompletionEmailRecipients"/>
+        <entry key="taskCompletionEmailTemplate"/>
+        <entry key="taskList" value="Custom-TaskDefinition-AccountAggregation-HRFile, Custom-TaskDefinition-AccountGroupAggregation-OpenLDAP, Custom-TaskDefinition-AccountAggregation-OpenLDAP, Refresh Identity Cube"/>
+        <entry key="trace" value="false"/>
+        </Map>
+    </Attributes>
+    <Description>Perform a full aggregation + refresh.</Description>
+    <Owner>
+        <Reference class="sailpoint.object.Identity" name="spadmin"/>
+    </Owner>
+    <Parent>
+        <Reference class="sailpoint.object.TaskDefinition" name="Sequential Task Launcher"/>
+    </Parent>
+    </TaskDefinition>
+
 </sailpoint>
