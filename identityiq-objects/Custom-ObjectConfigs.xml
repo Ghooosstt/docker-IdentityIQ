@@ -68,6 +68,13 @@
             </ApplicationRef>
             </AttributeSource>
         </ObjectAttribute>
+        <ObjectAttribute displayName="Entity" editMode="ReadOnly" name="entity" type="string">
+            <AttributeSource name="entity">
+            <ApplicationRef>
+                <Reference class="sailpoint.object.Application" name="HR File"/>
+            </ApplicationRef>
+            </AttributeSource>
+        </ObjectAttribute>
         <ObjectAttribute displayName="End Date" editMode="ReadOnly" name="endDate" type="string">
             <AttributeSource name="endDate">
             <ApplicationRef>
@@ -93,7 +100,7 @@
     <UIConfig name="UIConfig">
         <Attributes>
         <Map>
-            <entry key="identityViewAttributes" value="name,firstname,lastname,displayName,email,phoneNumber,manager,type,country,city,endDate,inactive"/>
+            <entry key="identityViewAttributes" value="name,firstname,lastname,displayName,email,phoneNumber,manager,type,country,city,entity,endDate,inactive"/>
         </Map>
         </Attributes>
     </UIConfig>
