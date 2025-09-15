@@ -120,7 +120,7 @@
       <AttributeDefinition name="city" type="string">
         <Description></Description>
       </AttributeDefinition>
-      <AttributeDefinition name="entity" type="string">
+      <AttributeDefinition name="organization" type="string">
         <Description></Description>
       </AttributeDefinition>
       <AttributeDefinition name="endDate" type="string">

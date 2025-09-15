@@ -193,21 +193,33 @@
     import sailpoint.object.ManagedAttribute;
     import sailpoint.object.Profile;
     import sailpoint.object.Application;
+    import sailpoint.object.Identity;
 
     Application openLDAP = context.getObjectByName(Application.class, "OpenLDAP");
+    Identity spadmin = context.getObjectByName(Identity.class, "spadmin");
 
     // Create organizationals bundles
-    Bundle itRolesOrga = new Bundle();
-    itRolesOrga.setName("itRoles");
-    itRolesOrga.setDisplayName("IT Roles");
-    itRolesOrga.setType("organizational");
-    context.saveObject(itRolesOrga);
+    Bundle itRolesOrga = context.getObjectByName(Bundle.class, "itRoles");
+    if (itRolesOrga == null)
+    {
+        itRolesOrga = new Bundle();
+        itRolesOrga.setName("itRoles");
+        itRolesOrga.setDisplayName("IT Roles");
+        itRolesOrga.setType("organizational");
+        itRolesOrga.setOwner(spadmin);
+        context.saveObject(itRolesOrga);
+    }
 
-    Bundle businessRolesOrga = new Bundle();
-    businessRolesOrga.setName("businessRoles");
-    businessRolesOrga.setDisplayName("Business Roles");
-    businessRolesOrga.setType("organizational");
-    context.saveObject(businessRolesOrga);
+    Bundle businessRolesOrga = context.getObjectByName(Bundle.class, "businessRoles");
+    if (businessRolesOrga == null)
+    {
+        businessRolesOrga = new Bundle();
+        businessRolesOrga.setName("businessRoles");
+        businessRolesOrga.setDisplayName("Business Roles");
+        businessRolesOrga.setType("organizational");
+        businessRolesOrga.setOwner(spadmin);
+        context.saveObject(businessRolesOrga);
+    }
 
     // Create IT role and Business role for each OpenLDAP group
     QueryOptions qo = new QueryOptions();
@@ -219,32 +231,44 @@
         ManagedAttribute ma = it.next();
         String cnRole = ma.getAttribute("cn");
         String dnValue = ma.getValue();
+        String roleName = cnRole;
+        String itRoleName = cnRole + "-IT";
 
         // Build IT Role
-        Bundle itRole = new Bundle();
-        itRole.setName(cnRole + "-IT");
-        itRole.setDisplayName(cnRole + "-IT");
-        itRole.setType("it");
-        itRole.addInheritance(itRolesOrga);
-        // Build profile
-        Profile profile = new Profile();
-        profile.setApplication(openLDAP);
-        ArrayList constraintsValue = new ArrayList();
-        constraintsValue.add(dnValue);
-        Filter constraintFilter = Filter.containsAll("memberOf", constraintsValue);
-        profile.addConstraint(constraintFilter);
-        // Add the profile (entitlement constraint) in the IT role
-        itRole.add(profile);
-        context.saveObject(itRole);
+        Bundle itRole = context.getObjectByName(Bundle.class, itRoleName);
+        if (itRole == null)
+        {
+            itRole = new Bundle();
+            itRole.setName(itRoleName);
+            itRole.setDisplayName(itRoleName);
+            itRole.setType("it");
+            itRole.setOwner(spadmin);
+            itRole.addInheritance(itRolesOrga);
+            // Build profile
+            Profile profile = new Profile();
+            profile.setApplication(openLDAP);
+            ArrayList constraintsValue = new ArrayList();
+            constraintsValue.add(dnValue);
+            Filter constraintFilter = Filter.containsAll("memberOf", constraintsValue);
+            profile.addConstraint(constraintFilter);
+            // Add the profile (entitlement constraint) in the IT role
+            itRole.add(profile);
+            context.saveObject(itRole);
+        }
 
         // Build Business Role
-        Bundle businessRole = new Bundle();
-        businessRole.setName(cnRole);
-        businessRole.setDisplayName(cnRole);
-        businessRole.setType("business");
-        businessRole.addRequirement(itRole);
-        businessRole.addInheritance(businessRolesOrga);
-        context.saveObject(businessRole);
+        Bundle businessRole = context.getObjectByName(Bundle.class, roleName);
+        if (businessRole == null)
+        {
+            businessRole = new Bundle();
+            businessRole.setName(roleName);
+            businessRole.setDisplayName(roleName);
+            businessRole.setType("business");
+            businessRole.setOwner(spadmin);
+            businessRole.addRequirement(itRole);
+            businessRole.addInheritance(businessRolesOrga);
+            context.saveObject(businessRole);
+        }
     }
 
     context.commitTransaction();

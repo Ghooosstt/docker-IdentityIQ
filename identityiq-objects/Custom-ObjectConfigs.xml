@@ -5,6 +5,11 @@
   <!-- ObjectConfig Identity (merge option) -->
   <ImportAction name="merge">
     <ObjectConfig name="Identity">
+        <Attributes>
+            <Map>
+                <entry key="scopeCorrelationAttribute" value="organization"/>
+            </Map>
+        </Attributes>
         <ObjectAttribute displayName="att_display_name" editMode="ReadOnly" name="displayName" standard="true" type="string">
             <AttributeSource name="displayName">
             <ApplicationRef>
@@ -54,7 +59,7 @@
             </ApplicationRef>
             </AttributeSource>
         </ObjectAttribute>
-        <ObjectAttribute displayName="Country" editMode="ReadOnly" name="country" type="string">
+        <ObjectAttribute displayName="Country" editMode="ReadOnly" extendedNumber="1" name="country" type="string">
             <AttributeSource name="country">
             <ApplicationRef>
                 <Reference class="sailpoint.object.Application" name="HR File"/>
@@ -68,8 +73,8 @@
             </ApplicationRef>
             </AttributeSource>
         </ObjectAttribute>
-        <ObjectAttribute displayName="Entity" editMode="ReadOnly" name="entity" type="string">
-            <AttributeSource name="entity">
+        <ObjectAttribute displayName="Organization" editMode="ReadOnly" extendedNumber="2" name="organization" type="string">
+            <AttributeSource name="organization">
             <ApplicationRef>
                 <Reference class="sailpoint.object.Application" name="HR File"/>
             </ApplicationRef>
@@ -100,7 +105,19 @@
     <UIConfig name="UIConfig">
         <Attributes>
         <Map>
-            <entry key="identityViewAttributes" value="name,firstname,lastname,displayName,email,phoneNumber,manager,type,country,city,entity,endDate,inactive"/>
+            <entry key="identityViewAttributes" value="name,firstname,lastname,displayName,email,phoneNumber,manager,type,country,city,organization,endDate,inactive"/>
+            <entry key="uiRequestAccessIdentityCard">
+                <value>
+                <List>
+                    <ColumnConfig dataIndex="id" fieldOnly="true" groupProperty="id" property="id" sortProperty="id" stateId="id"/>
+                    <ColumnConfig dataIndex="displayName" fieldOnly="true" groupProperty="displayName" property="displayName" sortProperty="displayName" sortable="true" stateId="displayName"/>
+                    <ColumnConfig dataIndex="name" groupProperty="name" headerKey="ui_access_username" property="name" sortProperty="name" stateId="name"/>
+                    <ColumnConfig dataIndex="managerName" groupProperty="manager.displayName" headerKey="ui_access_manager" property="manager.displayName" sortProperty="manager.displayName" stateId="managerName"/>
+                    <ColumnConfig dataIndex="country" groupProperty="country" headerKey="Country" property="country" sortProperty="country" stateId="country"/>
+                    <ColumnConfig dataIndex="organization" groupProperty="organization" headerKey="Organization" property="organization" sortProperty="organization" stateId="organization"/>
+                </List>
+                </value>
+            </entry>
         </Map>
         </Attributes>
     </UIConfig>
@@ -123,6 +140,26 @@
                 </value>
             </entry>
             <entry key="syslogLevel" value="WARN"/>
+            <entry key="allowRolePropagation">
+                <value>
+                <Boolean>true</Boolean>
+                </value>
+            </entry>
+            <entry key="identityControlsAssignedScope">
+                <value>
+                <Boolean>true</Boolean>
+                </value>
+            </entry>
+            <entry key="scopingEnabled">
+                <value>
+                <Boolean>true</Boolean>
+                </value>
+            </entry>
+            <entry key="unscopedObjectsGloballyAccessible">
+                <value>
+                <Boolean>true</Boolean>
+                </value>
+            </entry>
         </Map>
         </Attributes>
     </Configuration>

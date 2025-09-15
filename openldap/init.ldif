@@ -10,6 +10,24 @@ changetype: add
 objectClass: organizationalUnit
 ou: Group
 
+# Create Organizational Unit Organization A
+dn: ou=Organization-A,ou=Group,dc=my-company,dc=com
+changetype: add
+objectClass: organizationalUnit
+ou: Organization-A
+
+# Create Organizational Unit Organization B
+dn: ou=Organization-B,ou=Group,dc=my-company,dc=com
+changetype: add
+objectClass: organizationalUnit
+ou: Organization-B
+
+# Create Organizational Unit Organization C
+dn: ou=Organization-C,ou=Group,dc=my-company,dc=com
+changetype: add
+objectClass: organizationalUnit
+ou: Organization-C
+
 # Add John Smith to the organization
 dn: uid=john.smith,ou=People,dc=my-company,dc=com
 changetype: add
@@ -39,17 +57,44 @@ manager: uid=john.smith,ou=People,dc=my-company,dc=com
 employeeNumber: 00000002
 employeeType: internal
 
-# Create group Engineer
-dn: cn=Engineer,ou=Group,dc=my-company,dc=com
+# Create group Engineer Organization A
+dn: cn=Engineer-A,ou=Organization-A,ou=Group,dc=my-company,dc=com
 changetype: add
 objectclass: groupOfUniqueNames
-cn: Engineer
+cn: Engineer-A
 uniquemember: uid=john.smith,ou=People,dc=my-company,dc=com
 
-# Create group Office Access
-dn: cn=Office Access,ou=Group,dc=my-company,dc=com
+# Create group Engineer Organization B
+dn: cn=Engineer-B,ou=Organization-B,ou=Group,dc=my-company,dc=com
 changetype: add
 objectclass: groupOfUniqueNames
-cn: Office Access
+cn: Engineer-B
+uniquemember:
+
+# Create group Engineer Organization C
+dn: cn=Engineer-C,ou=Organization-C,ou=Group,dc=my-company,dc=com
+changetype: add
+objectclass: groupOfUniqueNames
+cn: Engineer-C
+uniquemember:
+
+# Create group Office Access Organization A
+dn: cn=OfficeAccess-A,ou=Organization-A,ou=Group,dc=my-company,dc=com
+changetype: add
+objectclass: groupOfUniqueNames
+cn: OfficeAccess-A
 uniquemember: uid=john.smith,ou=People,dc=my-company,dc=com
+
+# Create group Office Access Organization B
+dn: cn=OfficeAccess-B,ou=Organization-B,ou=Group,dc=my-company,dc=com
+changetype: add
+objectclass: groupOfUniqueNames
+cn: OfficeAccess-B
 uniquemember: uid=sally.brown,ou=People,dc=my-company,dc=com
+
+# Create group Office Access Organization C
+dn: cn=OfficeAccess-C,ou=Organization-C,ou=Group,dc=my-company,dc=com
+changetype: add
+objectclass: groupOfUniqueNames
+cn: OfficeAccess-C
+uniquemember:

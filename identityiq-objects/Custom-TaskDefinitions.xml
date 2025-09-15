@@ -106,6 +106,77 @@
     </TaskDefinition>
 
 
+    <!-- Task Propagate Roles Changes -->
+    <TaskDefinition name="Custom-Propagate Roles Changes" resultAction="Rename" subType="task_item_type_identity" type="Identity">
+    <Attributes>
+        <Map>
+        <entry key="TaskSchedule.host"/>
+        <entry key="checkPolicies" value="false"/>
+        <entry key="enablePartitioning" value="false"/>
+        <entry key="keepInactiveViolations" value="false"/>
+        <entry key="taskCompletionEmailNotify" value="Disabled"/>
+        <entry key="taskCompletionEmailRecipients"/>
+        <entry key="taskCompletionEmailTemplate"/>
+        </Map>
+    </Attributes>
+    <Description>Template for role propagation.</Description>
+    <Owner>
+        <Reference class="sailpoint.object.Identity" name="spadmin"/>
+    </Owner>
+    <Parent>
+        <Reference class="sailpoint.object.TaskDefinition" name="Propagate Role Changes"/>
+    </Parent>
+    </TaskDefinition>
+
+
+    <!-- Task Refresh Identity Cube -->
+    <TaskDefinition name="Custom-Refresh Identity Cube" resultAction="Rename" subType="task_item_type_identity" type="Identity">
+    <Attributes>
+        <Map>
+        <entry key="TaskSchedule.host"/>
+        <entry key="checkHistory" value="false"/>
+        <entry key="checkPolicies" value="true"/>
+        <entry key="correlateEntitlements" value="true"/>
+        <entry key="correlateScope" value="true"/>
+        <entry key="deleteDormantGroups" value="false"/>
+        <entry key="disableIdentityProcessingThreshold" value="false"/>
+        <entry key="disableManagerLookup" value="false"/>
+        <entry key="doManualActions" value="false"/>
+        <entry key="enableManualAccountSelection" value="false"/>
+        <entry key="enablePartitioning" value="false"/>
+        <entry key="excludeInactive" value="false"/>
+        <entry key="filterNeedsRefresh" value="false"/>
+        <entry key="forceWorkflow" value="false"/>
+        <entry key="includeWindowModified" value="false"/>
+        <entry key="keepInactiveViolations" value="false"/>
+        <entry key="markDormantScopes" value="false"/>
+        <entry key="noAutoCreateScopes" value="false"/>
+        <entry key="noMaintenanceWindowRetry" value="false"/>
+        <entry key="noResetNeedsRefresh" value="false"/>
+        <entry key="noRoleDeprovisioning" value="false"/>
+        <entry key="processTriggers" value="true"/>
+        <entry key="promoteAttributes" value="true"/>
+        <entry key="promoteManagedAttributes" value="false"/>
+        <entry key="provision" value="true"/>
+        <entry key="refreshCompositeApplications" value="false"/>
+        <entry key="refreshGroups" value="false"/>
+        <entry key="refreshIdentityEntitlements" value="false"/>
+        <entry key="refreshManagerStatus" value="true"/>
+        <entry key="refreshRoleMetadata" value="false"/>
+        <entry key="refreshScorecard" value="true"/>
+        <entry key="synchronizeAttributes" value="true"/>
+        <entry key="taskCompletionEmailNotify" value="Disabled"/>
+        <entry key="taskCompletionEmailRecipients"/>
+        <entry key="taskCompletionEmailTemplate"/>
+        </Map>
+    </Attributes>
+    <Description>Perform a full refresh of all the identities.</Description>
+    <Parent>
+        <Reference class="sailpoint.object.TaskDefinition" name="Identity Refresh"/>
+    </Parent>
+    </TaskDefinition>
+
+
     <!-- Task CreateRoleModel -->
     <TaskDefinition name="Custom-TaskDefinition-CreateRoleModel" resultAction="Rename" subType="task_item_type_generic" type="Generic">
     <Attributes>
@@ -136,7 +207,7 @@
         <entry key="taskCompletionEmailNotify" value="Disabled"/>
         <entry key="taskCompletionEmailRecipients"/>
         <entry key="taskCompletionEmailTemplate"/>
-        <entry key="taskList" value="Custom-TaskDefinition-AccountAggregation-HRFile, Custom-TaskDefinition-AccountGroupAggregation-OpenLDAP, Custom-TaskDefinition-AccountAggregation-OpenLDAP, Custom-TaskDefinition-CreateRoleModel, Full Text Index Refresh, Refresh Identity Cube"/>
+        <entry key="taskList" value="Custom-TaskDefinition-AccountAggregation-HRFile, Custom-TaskDefinition-AccountGroupAggregation-OpenLDAP, Custom-TaskDefinition-AccountAggregation-OpenLDAP, Custom-TaskDefinition-CreateRoleModel, Full Text Index Refresh, Custom-Propagate Roles Changes, Custom-Refresh Identity Cube"/>
         <entry key="trace" value="false"/>
         </Map>
     </Attributes>
@@ -158,7 +229,7 @@
         <entry key="taskCompletionEmailNotify" value="Disabled"/>
         <entry key="taskCompletionEmailRecipients"/>
         <entry key="taskCompletionEmailTemplate"/>
-        <entry key="taskList" value="Custom-TaskDefinition-AccountAggregation-HRFile, Custom-TaskDefinition-AccountGroupAggregation-OpenLDAP, Custom-TaskDefinition-AccountAggregation-OpenLDAP, Refresh Identity Cube"/>
+        <entry key="taskList" value="Custom-TaskDefinition-AccountAggregation-HRFile, Custom-TaskDefinition-AccountGroupAggregation-OpenLDAP, Custom-TaskDefinition-AccountAggregation-OpenLDAP, Custom-Propagate Roles Changes, Refresh Identity Cube"/>
         <entry key="trace" value="false"/>
         </Map>
     </Attributes>
