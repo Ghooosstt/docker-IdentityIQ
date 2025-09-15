@@ -118,6 +118,54 @@
                 </List>
                 </value>
             </entry>
+            <entry key="uiManageAccountsIdentityCard">
+                <value>
+                <List>
+                    <ColumnConfig dataIndex="id" fieldOnly="true" groupProperty="id" property="id" sortProperty="id" stateId="id"/>
+                    <ColumnConfig dataIndex="displayName" fieldOnly="true" groupProperty="displayName" property="displayName" sortProperty="displayName" sortable="true" stateId="displayName"/>
+                    <ColumnConfig dataIndex="name" groupProperty="name" headerKey="ui_access_username" property="name" sortProperty="name" stateId="name"/>
+                    <ColumnConfig dataIndex="managerName" groupProperty="manager.displayName" headerKey="ui_access_manager" property="manager.displayName" sortProperty="manager.displayName" stateId="managerName"/>
+                    <ColumnConfig dataIndex="country" groupProperty="country" headerKey="Country" property="country" sortProperty="country" stateId="country"/>
+                    <ColumnConfig dataIndex="organization" groupProperty="organization" headerKey="Organization" property="organization" sortProperty="organization" stateId="organization"/>
+                </List>
+                </value>
+            </entry>
+            <entry key="uiManageEditIdentityCard">
+                <value>
+                <List>
+                    <ColumnConfig dataIndex="id" fieldOnly="true" groupProperty="id" property="id" sortProperty="id" stateId="id"/>
+                    <ColumnConfig dataIndex="displayName" fieldOnly="true" groupProperty="displayName" property="displayName" sortProperty="displayName" sortable="true" stateId="displayName"/>
+                    <ColumnConfig dataIndex="name" groupProperty="name" headerKey="ui_access_username" property="name" sortProperty="name" stateId="name"/>
+                    <ColumnConfig dataIndex="managerName" groupProperty="manager.displayName" headerKey="ui_access_manager" property="manager.displayName" sortProperty="manager.displayName" stateId="managerName"/>
+                    <ColumnConfig dataIndex="country" groupProperty="country" headerKey="Country" property="country" sortProperty="country" stateId="country"/>
+                    <ColumnConfig dataIndex="organization" groupProperty="organization" headerKey="Organization" property="organization" sortProperty="organization" stateId="organization"/>
+                </List>
+                </value>
+            </entry>
+            <entry key="uiManagePasswordsIdentityCard">
+                <value>
+                <List>
+                    <ColumnConfig dataIndex="id" fieldOnly="true" groupProperty="id" property="id" sortProperty="id" stateId="id"/>
+                    <ColumnConfig dataIndex="displayName" fieldOnly="true" groupProperty="displayName" property="displayName" sortProperty="displayName" sortable="true" stateId="displayName"/>
+                    <ColumnConfig dataIndex="name" groupProperty="name" headerKey="ui_access_username" property="name" sortProperty="name" stateId="name"/>
+                    <ColumnConfig dataIndex="managerName" groupProperty="manager.displayName" headerKey="ui_access_manager" property="manager.displayName" sortProperty="manager.displayName" stateId="managerName"/>
+                    <ColumnConfig dataIndex="country" groupProperty="country" headerKey="Country" property="country" sortProperty="country" stateId="country"/>
+                    <ColumnConfig dataIndex="organization" groupProperty="organization" headerKey="Organization" property="organization" sortProperty="organization" stateId="organization"/>
+                </List>
+                </value>
+            </entry>
+            <entry key="uiManageViewIdentityAttributesCard">
+                <value>
+                <List>
+                    <ColumnConfig dataIndex="id" fieldOnly="true" groupProperty="id" property="id" sortProperty="id" stateId="id"/>
+                    <ColumnConfig dataIndex="displayName" fieldOnly="true" groupProperty="displayName" property="displayName" sortProperty="displayName" sortable="true" stateId="displayName"/>
+                    <ColumnConfig dataIndex="name" groupProperty="name" headerKey="ui_access_username" property="name" sortProperty="name" stateId="name"/>
+                    <ColumnConfig dataIndex="managerName" groupProperty="manager.displayName" headerKey="ui_access_manager" property="manager.displayName" sortProperty="manager.displayName" stateId="managerName"/>
+                    <ColumnConfig dataIndex="country" groupProperty="country" headerKey="Country" property="country" sortProperty="country" stateId="country"/>
+                    <ColumnConfig dataIndex="organization" groupProperty="organization" headerKey="Organization" property="organization" sortProperty="organization" stateId="organization"/>
+                </List>
+                </value>
+            </entry>
         </Map>
         </Attributes>
     </UIConfig>
