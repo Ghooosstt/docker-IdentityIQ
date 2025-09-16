@@ -4,6 +4,7 @@
 
     <!-- Workflow Terminate Identity -->
     <Workflow explicitTransitions="true" name="Custom-Terminate Identity" type="">
+        <Variable initializer="false" name="trace"/>
         <Step icon="Start" name="Start" posX="20" posY="20">
             <Transition to="Rename taskResult"/>
         </Step>
@@ -12,7 +13,8 @@
             <Source><![CDATA[
                     import sailpoint.object.Identity;
                     Identity identity = context.getObjectByName(Identity.class, launcher);
-                    wfcase.getTaskResult().setName("Terminate Identity launched by " + identity.getDisplayName() +" ("+ launcher +")");
+                    Identity requestee = context.getObjectById(Identity.class, quickLinkIdentityId);
+                    wfcase.getTaskResult().setName("Terminate Identity launched by " + identity.getDisplayName() +" ("+ launcher +") on " + requestee.getDisplayName() + " (" + requestee.getName() + ")");
                 ]]></Source>
             </Script>
             <Transition to="Teminate identity"/>
@@ -26,6 +28,7 @@
 
     <!-- Workflow Reactivate Identity -->
     <Workflow explicitTransitions="true" name="Custom-Reactivate Identity" type="">
+        <Variable initializer="false" name="trace"/>
         <Step icon="Start" name="Start" posX="20" posY="20">
             <Transition to="Rename taskresult"/>
         </Step>
@@ -34,7 +37,8 @@
             <Source><![CDATA[
                 import sailpoint.object.Identity;
                 Identity identity = context.getObjectByName(Identity.class, launcher);
-                wfcase.getTaskResult().setName("Reactivate Identity launched by " + identity.getDisplayName() +" ("+ launcher +")");
+                Identity requestee = context.getObjectById(Identity.class, quickLinkIdentityId);
+                wfcase.getTaskResult().setName("Reactivate Identity launched by " + identity.getDisplayName() +" ("+ launcher +") on " + requestee.getDisplayName() + " (" + requestee.getName() + ")");
                 ]]></Source>
             </Script>
             <Transition to="Reactivate identity"/>
