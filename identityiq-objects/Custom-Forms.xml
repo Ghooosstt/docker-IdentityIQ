@@ -42,7 +42,7 @@
         </Field>
         <Field displayName="First Name" name="firstname" postBack="true" required="true" type="string"/>
         <Field displayName="Last Name" name="lastname" postBack="true" required="true" type="string"/>
-        <Field displayName="Display Name" name="displayName" required="true" type="string">
+        <Field displayName="Display Name" dynamic="true" name="displayName" required="true" type="string">
             <Attributes>
                 <Map>
                     <entry key="readOnly" value="true"/>
@@ -150,7 +150,7 @@
                 </Script>
             </AllowedValuesDefinition>
         </Field>
-        <Field displayName="Email" name="email" required="true" type="string">
+        <Field displayName="Email" dynamic="true" name="email" required="true" type="string">
             <Attributes>
                 <Map>
                     <entry key="readOnly" value="true"/>
