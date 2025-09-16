@@ -17,63 +17,63 @@
             </ApplicationRef>
             </AttributeSource>
         </ObjectAttribute>
-        <ObjectAttribute displayName="att_email" editMode="ReadOnly" name="email" standard="true" type="string">
+        <ObjectAttribute displayName="att_email" editMode="UntilFeedValueChanges" name="email" standard="true" type="string">
             <AttributeSource name="email">
             <ApplicationRef>
                 <Reference class="sailpoint.object.Application" name="HR File"/>
             </ApplicationRef>
             </AttributeSource>
         </ObjectAttribute>
-        <ObjectAttribute displayName="att_first_name" editMode="ReadOnly" name="firstname" standard="true" type="string">
+        <ObjectAttribute displayName="att_first_name" editMode="UntilFeedValueChanges" name="firstname" standard="true" type="string">
             <AttributeSource name="firstname">
             <ApplicationRef>
                 <Reference class="sailpoint.object.Application" name="HR File"/>
             </ApplicationRef>
             </AttributeSource>
         </ObjectAttribute>
-        <ObjectAttribute displayName="att_last_name" editMode="ReadOnly" name="lastname" standard="true" type="string">
+        <ObjectAttribute displayName="att_last_name" editMode="UntilFeedValueChanges" name="lastname" standard="true" type="string">
             <AttributeSource name="lastname">
             <ApplicationRef>
                 <Reference class="sailpoint.object.Application" name="HR File"/>
             </ApplicationRef>
             </AttributeSource>
         </ObjectAttribute>
-        <ObjectAttribute displayName="att_manager" editMode="ReadOnly" groupFactory="true" name="manager" standard="true" type="sailpoint.object.Identity">
+        <ObjectAttribute displayName="att_manager" editMode="UntilFeedValueChanges" groupFactory="true" name="manager" standard="true" type="sailpoint.object.Identity">
             <AttributeSource name="manager">
             <ApplicationRef>
                 <Reference class="sailpoint.object.Application" name="HR File"/>
             </ApplicationRef>
             </AttributeSource>
         </ObjectAttribute>
-        <ObjectAttribute displayName="att_identity_type" editMode="ReadOnly" name="type" standard="true" type="string">
+        <ObjectAttribute displayName="att_identity_type" editMode="UntilFeedValueChanges" name="type" standard="true" type="string">
             <AttributeSource name="type">
             <ApplicationRef>
                 <Reference class="sailpoint.object.Application" name="HR File"/>
             </ApplicationRef>
             </AttributeSource>
         </ObjectAttribute>
-        <ObjectAttribute displayName="Phone Number" editMode="ReadOnly" name="phoneNumber" type="string">
+        <ObjectAttribute displayName="Phone Number" editMode="UntilFeedValueChanges" name="phoneNumber" type="string">
             <AttributeSource name="phoneNumber">
             <ApplicationRef>
                 <Reference class="sailpoint.object.Application" name="HR File"/>
             </ApplicationRef>
             </AttributeSource>
         </ObjectAttribute>
-        <ObjectAttribute displayName="Country" editMode="ReadOnly" extendedNumber="1" name="country" type="string">
+        <ObjectAttribute displayName="Country" editMode="UntilFeedValueChanges" extendedNumber="1" name="country" type="string">
             <AttributeSource name="country">
             <ApplicationRef>
                 <Reference class="sailpoint.object.Application" name="HR File"/>
             </ApplicationRef>
             </AttributeSource>
         </ObjectAttribute>
-        <ObjectAttribute displayName="City" editMode="ReadOnly" name="city" type="string">
+        <ObjectAttribute displayName="City" editMode="UntilFeedValueChanges" name="city" type="string">
             <AttributeSource name="city">
             <ApplicationRef>
                 <Reference class="sailpoint.object.Application" name="HR File"/>
             </ApplicationRef>
             </AttributeSource>
         </ObjectAttribute>
-        <ObjectAttribute displayName="Organization" editMode="ReadOnly" extendedNumber="2" name="organization" type="string">
+        <ObjectAttribute displayName="Organization" editMode="UntilFeedValueChanges" extendedNumber="2" name="organization" type="string">
             <AttributeSource name="organization">
             <ApplicationRef>
                 <Reference class="sailpoint.object.Application" name="HR File"/>
@@ -87,7 +87,7 @@
             </ApplicationRef>
             </AttributeSource>
         </ObjectAttribute>
-        <ObjectAttribute displayName="End Date" editMode="ReadOnly" name="endDate" type="string">
+        <ObjectAttribute displayName="End Date" editMode="UntilFeedValueChanges" name="endDate" type="string">
             <AttributeSource name="endDate">
             <ApplicationRef>
                 <Reference class="sailpoint.object.Application" name="HR File"/>
