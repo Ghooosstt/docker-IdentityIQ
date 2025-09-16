@@ -123,6 +123,9 @@
       <AttributeDefinition name="organization" type="string">
         <Description></Description>
       </AttributeDefinition>
+      <AttributeDefinition name="secretNumber" type="string">
+        <Description></Description>
+      </AttributeDefinition>
       <AttributeDefinition name="endDate" type="string">
         <Description></Description>
       </AttributeDefinition>

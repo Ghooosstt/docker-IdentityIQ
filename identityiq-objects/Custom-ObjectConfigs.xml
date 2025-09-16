@@ -80,6 +80,13 @@
             </ApplicationRef>
             </AttributeSource>
         </ObjectAttribute>
+        <ObjectAttribute displayName="Secret Number" editMode="ReadOnly" name="secretNumber" type="string">
+            <AttributeSource name="secretNumber">
+            <ApplicationRef>
+                <Reference class="sailpoint.object.Application" name="HR File"/>
+            </ApplicationRef>
+            </AttributeSource>
+        </ObjectAttribute>
         <ObjectAttribute displayName="End Date" editMode="ReadOnly" name="endDate" type="string">
             <AttributeSource name="endDate">
             <ApplicationRef>
@@ -105,7 +112,7 @@
     <UIConfig name="UIConfig">
         <Attributes>
         <Map>
-            <entry key="identityViewAttributes" value="name,firstname,lastname,displayName,email,phoneNumber,manager,type,country,city,organization,endDate,inactive"/>
+            <entry key="identityViewAttributes" value="name,firstname,lastname,displayName,email,phoneNumber,manager,type,country,city,organization,secretNumber,endDate,inactive"/>
             <entry key="uiRequestAccessIdentityCard">
                 <value>
                 <List>
