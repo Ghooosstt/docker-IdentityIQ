@@ -166,6 +166,26 @@
                 </List>
                 </value>
             </entry>
+            <entry key="identityTableColumns">
+                <value>
+                <List>
+                    <ColumnConfig dataIndex="id" fieldOnly="true" groupProperty="id" property="id" sortProperty="id" stateId="id"/>
+                    <ColumnConfig dataIndex="name" groupProperty="name" headerKey="idents_grid_hdr_name" hideable="true" property="name" sortProperty="name" sortable="true" stateId="name"/>
+                    <ColumnConfig dataIndex="firstname" groupProperty="firstname" headerKey="idents_grid_hdr_first_name" hideable="true" property="firstname" sortProperty="firstname" sortable="true" stateId="firstname"/>
+                    <ColumnConfig dataIndex="lastname" groupProperty="lastname" headerKey="idents_grid_hdr_last_name" hideable="true" property="lastname" sortProperty="lastname" sortable="true" stateId="lastname"/>
+                    <ColumnConfig dataIndex="manager-displayName" groupProperty="manager.displayName" headerKey="idents_grid_hdr_manager" hideable="true" property="manager.displayName" sortProperty="manager.displayName" sortable="true" stateId="manager-displayName"/>
+                    <ColumnConfig dataIndex="type" groupProperty="type" headerKey="idents_grid_hdr_type" hideable="true" property="type" sortProperty="type" sortable="true" stateId="type"/>
+                    <ColumnConfig dataIndex="organization" groupProperty="organization" headerKey="Organization" hideable="true" property="organization" sortProperty="organization" sortable="true" stateId="organization"/>
+                    <ColumnConfig dataIndex="assignedRoleSummary" groupProperty="assignedRoleSummary" headerKey="idents_grid_hdr_assigned_roles" hideable="true" property="assignedRoleSummary" sortProperty="assignedRoleSummary" stateId="assignedRoleSummary"/>
+                    <ColumnConfig dataIndex="bundleSummary" groupProperty="bundleSummary" headerKey="idents_grid_hdr_detected_roles" hideable="true" property="bundleSummary" sortProperty="bundleSummary" stateId="bundleSummary"/>
+                    <ColumnConfig dataIndex="scorecard-compositeScore" groupProperty="scorecard.compositeScore" headerKey="idents_grid_hdr_composite_score" hideable="true" property="scorecard.compositeScore" renderer="SailPoint.Define.Grid.Identity.renderScore" sortProperty="scorecard.compositeScore" sortable="true" stateId="scorecard-compositeScore"/>
+                    <ColumnConfig dataIndex="lastRefresh" dateStyle="short" groupProperty="lastRefresh" headerKey="idents_grid_hdr_last_refresh" hideable="true" property="lastRefresh" sortProperty="lastRefresh" sortable="true" stateId="lastRefresh"/>
+                    <ColumnConfig dataIndex="softwareVersion" groupProperty="softwareVersion" headerKey="idents_grid_hdr_software_version" hidden="true" hideable="true" property="softwareVersion" sortProperty="softwareVersion" sortable="true" stateId="softwareVersion"/>
+                    <ColumnConfig dataIndex="administrator-displayName" groupProperty="administrator.displayName" headerKey="idents_grid_hdr_administrator" hidden="true" hideable="true" property="administrator.displayName" sortProperty="administrator.displayName" sortable="true" stateId="administrator-displayName"/>
+                    <ColumnConfig dataIndex="managerStatus" fieldOnly="true" groupProperty="managerStatus" property="managerStatus" sortProperty="managerStatus" stateId="managerStatus"/>
+                </List>
+                </value>
+            </entry>
         </Map>
         </Attributes>
     </UIConfig>
