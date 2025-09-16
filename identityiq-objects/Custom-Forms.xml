@@ -1,0 +1,189 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE sailpoint PUBLIC "sailpoint.dtd" "sailpoint.dtd">
+<sailpoint>
+
+    <!-- Form Create Identity -->
+    <Form name="Custom-Create Identity" type="CreateIdentity">
+    <Attributes>
+        <Map>
+            <entry key="pageTitle" value="Custom-Create Identity"/>
+        </Map>
+    </Attributes>
+    <Description></Description>
+    <Section name="Information">
+        <Field displayName="Identifiant" name="name" required="true" type="string">
+            <Attributes>
+                <Map>
+                    <entry key="readOnly" value="true"/>
+                </Map>
+            </Attributes>
+            <Script>
+                <Source><![CDATA[
+                import java.util.Random;
+                import sailpoint.object.Identity;
+
+                int low = 100000;
+                int high = 999999;
+
+                Random r = new Random();
+
+                int result = r.nextInt(high-low) + low;
+                String resultString = String.valueOf(result);
+
+                while (context.getObject(Identity.class, resultString) != null)
+                {
+                result = r.nextInt(high-low) + low;
+                resultString = String.valueOf(result);
+                }
+
+                return resultString;
+                ]]></Source>
+            </Script>
+        </Field>
+        <Field displayName="First Name" name="firstname" postBack="true" required="true" type="string"/>
+        <Field displayName="Last Name" name="lastname" postBack="true" required="true" type="string"/>
+        <Field displayName="Display Name" name="displayName" required="true" type="string">
+            <Attributes>
+                <Map>
+                    <entry key="readOnly" value="true"/>
+                </Map>
+            </Attributes>
+            <Script>
+                <Source><![CDATA[
+                if (firstname != null && lastname != null)
+                {
+                    return firstname + " " + lastname;
+                }
+                else
+                {
+                    return null;
+                }
+                ]]></Source>
+            </Script>
+        </Field>
+        <Field displayName="Organization" name="organization" postBack="true" required="true" type="string">
+            <AllowedValuesDefinition>
+                <Value>
+                <List>
+                    <String>Organization A</String>
+                    <String>Organization B</String>
+                    <String>Organization C</String>
+                </List>
+                </Value>
+            </AllowedValuesDefinition>
+        </Field>
+        <Field displayName="Password" name="password" required="true" type="secret" value="xyzzy">
+            <Attributes>
+                <Map>
+                    <entry key="hidden" value="true"/>
+                </Map>
+            </Attributes>
+        </Field>
+        <Field displayName="Password Confirmation" name="passwordConfirm" required="true" type="secret" value="xyzzy">
+            <Attributes>
+                <Map>
+                    <entry key="hidden" value="true"/>
+                </Map>
+            </Attributes>
+        </Field>
+        <Field displayName="Country" name="country" postBack="true" required="true" type="string">
+            <AllowedValuesDefinition>
+                <Value>
+                <List>
+                    <String>Switzerland</String>
+                    <String>Germany</String>
+                    <String>China</String>
+                    <String>United States</String>
+                    <String>Singapore</String>
+                    <String>Spain</String>
+                    <String>France</String>
+                    <String>England</String>
+                </List>
+                </Value>
+            </AllowedValuesDefinition>
+        </Field>
+        <Field displayName="City" displayType="combobox" name="city" required="true" type="string">
+            <AllowedValuesDefinition>
+                <Script>
+                <Source><![CDATA[
+                List allowedValues = new ArrayList();
+                if (country != null)
+                {
+                    switch(country) {
+                        case "Switzerland":
+                            allowedValues.add("Lausanne");
+                            allowedValues.add("Genève");
+                            break;
+                        case "Germany":
+                            allowedValues.add("Berlin");
+                            allowedValues.add("Munich");
+                            break;
+                        case "China":
+                            allowedValues.add("Berlin");
+                            allowedValues.add("Munich");
+                            break;
+                        case "United States":
+                            allowedValues.add("New York");
+                            allowedValues.add("Chicago");
+                            allowedValues.add("San Francisco");
+                            break;
+                        case "Singapore":
+                            allowedValues.add("Singapore");
+                            break;
+                        case "Spain":
+                            allowedValues.add("Madrid");
+                            allowedValues.add("Barcelona");
+                            break;
+                        case "France":
+                            allowedValues.add("Paris");
+                            break;
+                        case "England":
+                            allowedValues.add("London");
+                            allowedValues.add("Manchester");
+                            break;
+                        default:
+                            break;
+                    } 
+                }
+                return allowedValues;
+                ]]></Source>
+                </Script>
+            </AllowedValuesDefinition>
+        </Field>
+        <Field displayName="Email" name="email" required="true" type="string">
+            <Attributes>
+                <Map>
+                    <entry key="readOnly" value="true"/>
+                </Map>
+            </Attributes>
+            <Script>
+                <Source><![CDATA[
+                if (firstname != null && lastname != null)
+                {
+                    return firstname.toLowerCase() + "." + lastname.toLowerCase() + "@my-company.com";
+                }
+                else
+                {
+                    return null;
+                }
+                ]]></Source>
+            </Script>
+        </Field>
+        <Field displayName="End Date" name="endDate" type="date"/>
+        <Field displayName="Manager" filterString="workgroup == false &amp;&amp; inactive == false" name="manager" required="true" type="sailpoint.object.Identity"/>
+        <Field displayName="Phone Number" name="phoneNumber" type="string"/>
+        <Field displayName="Secret Number" name="secretNumber" required="true" type="string"/>
+        <Field displayName="Type" name="type" required="true" type="string">
+            <AllowedValuesDefinition>
+                <Value>
+                <List>
+                    <String>employee</String>
+                    <String>contractor</String>
+                </List>
+                </Value>
+            </AllowedValuesDefinition>
+        </Field>
+    </Section>
+    </Form>
+
+</sailpoint>

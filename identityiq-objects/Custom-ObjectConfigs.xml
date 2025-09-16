@@ -258,6 +258,7 @@
                 </List>
                 </value>
             </entry>
+            <entry key="createIdentityForm" value="Custom-Create Identity"/>
         </Map>
         </Attributes>
     </Configuration>
