@@ -52,9 +52,10 @@ if [ ! -e $CONTAINER_ALREADY_STARTED ]; then
     echo import custom files from identityiq-objects folder
     echo "import /work/Custom-Rules.xml" | ./iiq console
     echo "import /work/Custom-Applications.xml" | ./iiq console
-    echo "import /work/Custom-TaskDefinitions.xml" | ./iiq console
+    echo "import /work/Custom-Forms.xml" | ./iiq console
     echo "import /work/Custom-Workflows.xml" | ./iiq console
     echo "import /work/Custom-Quicklinks.xml" | ./iiq console
+    echo "import /work/Custom-TaskDefinitions.xml" | ./iiq console
     # We don't import ObjectConfigs if there is a custom war as this may erase some configurations from the custom war file.
     if [ "$IIQ_CUSTOM_WAR" != "yes" ]; then echo "import /work/Custom-ObjectConfigs.xml" | ./iiq console; fi
 
