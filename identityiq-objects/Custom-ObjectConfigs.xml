@@ -208,6 +208,15 @@
                 <Boolean>true</Boolean>
                 </value>
             </entry>
+            <entry key="searchInputDefinitions">
+                <value>
+                <List>
+                    <SearchInputDefinition description="task definition" headerKey="task definition" ignoreCase="true" inputType="Like" matchMode="ANYWHERE" name="taskDefinitionSearch" propertyName="name" propertyType="String" searchType="TaskResult"/>
+                    <SearchInputDefinition description="task schedule" headerKey="task schedule" ignoreCase="true" inputType="Like" matchMode="ANYWHERE" name="taskScheduleSearch" propertyName="name" propertyType="String" searchType="TaskSchedule"/>
+                    <SearchInputDefinition description="task result" headerKey="task result" ignoreCase="true" inputType="Like" matchMode="ANYWHERE" name="taskResultSearch" propertyName="name" propertyType="String" searchType="TaskResult"/>
+                </List>
+                </value>
+            </entry>
         </Map>
         </Attributes>
     </Configuration>

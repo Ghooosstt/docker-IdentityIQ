@@ -229,7 +229,7 @@
         <entry key="taskCompletionEmailNotify" value="Disabled"/>
         <entry key="taskCompletionEmailRecipients"/>
         <entry key="taskCompletionEmailTemplate"/>
-        <entry key="taskList" value="Custom-TaskDefinition-AccountAggregation-HRFile, Custom-TaskDefinition-AccountGroupAggregation-OpenLDAP, Custom-TaskDefinition-AccountAggregation-OpenLDAP, Custom-Propagate Roles Changes, Refresh Identity Cube"/>
+        <entry key="taskList" value="Custom-TaskDefinition-AccountAggregation-HRFile, Custom-TaskDefinition-AccountGroupAggregation-OpenLDAP, Custom-TaskDefinition-AccountAggregation-OpenLDAP, Custom-Propagate Roles Changes, Custom-Refresh Identity Cube"/>
         <entry key="trace" value="false"/>
         </Map>
     </Attributes>
