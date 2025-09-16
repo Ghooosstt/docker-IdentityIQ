@@ -28,6 +28,8 @@ COPY identityiq-${IIQ_VERSION}.zi* identityiq-${IIQ_VERSION}${IIQ_PATCH}.ja* ide
 COPY identityiq-objects/Custom-Rules.xml ./
 COPY identityiq-objects/Custom-Applications.xml ./
 COPY identityiq-objects/Custom-TaskDefinitions.xml ./
+COPY identityiq-objects/Custom-Workflows.xml ./
+COPY identityiq-objects/Custom-Quicklinks.xml ./
 COPY identityiq-objects/Custom-ObjectConfigs.xml ./
 COPY identityiq-objects/HR-file.csv ./
 

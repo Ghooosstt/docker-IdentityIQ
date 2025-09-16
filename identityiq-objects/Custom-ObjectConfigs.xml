@@ -186,6 +186,20 @@
                 </List>
                 </value>
             </entry>
+            <entry key="sailpoint.web.lcm.RequestPopulationBean">
+                <value>
+                <List>
+                    <ColumnConfig dataIndex="id" fieldOnly="true" groupProperty="id" property="id" sortProperty="id" stateId="id"/>
+                    <ColumnConfig dataIndex="IIQ_Selected" fieldOnly="true" stateId="IIQ_Selected"/>
+                    <ColumnConfig dataIndex="name" flex="1.0" groupProperty="name" headerKey="idents_grid_hdr_name" hideable="true" property="name" sortProperty="name" sortable="true" stateId="name"/>
+                    <ColumnConfig dataIndex="firstname" flex="1.0" groupProperty="firstname" headerKey="idents_grid_hdr_first_name" hideable="true" property="firstname" sortProperty="firstname" sortable="true" stateId="firstname"/>
+                    <ColumnConfig dataIndex="lastname" flex="1.0" groupProperty="lastname" headerKey="idents_grid_hdr_last_name" hideable="true" property="lastname" sortProperty="lastname" sortable="true" stateId="lastname"/>
+                    <ColumnConfig dataIndex="manager-displayName" flex="1.0" groupProperty="manager.displayName" headerKey="idents_grid_hdr_manager" hideable="true" property="manager.displayName" sortProperty="manager.displayName" sortable="true" stateId="manager-displayName"/>
+                    <ColumnConfig dataIndex="displayName" fieldOnly="true" flex="1.0" groupProperty="displayName" headerKey="idents_grid_hdr_display_name" property="displayName" sortProperty="displayName" stateId="displayName"/>
+                    <ColumnConfig dataIndex="organization" flex="1.0" groupProperty="organization" headerKey="Organization" hideable="true" property="organization" sortProperty="organization" sortable="true" stateId="organization"/>
+                </List>
+                </value>
+            </entry>
         </Map>
         </Attributes>
     </UIConfig>
@@ -225,7 +239,7 @@
             </entry>
             <entry key="unscopedObjectsGloballyAccessible">
                 <value>
-                <Boolean>true</Boolean>
+                <Boolean></Boolean>
                 </value>
             </entry>
             <entry key="searchInputDefinitions">

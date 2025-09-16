@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE sailpoint PUBLIC "sailpoint.dtd" "sailpoint.dtd">
+<sailpoint>
+
+    <!-- Quicklink Terminate Identity -->
+    <QuickLink action="workflow" category="Manage" messageKey="Terminate Identity" name="Custom-TerminateIdentity" ordering="98">
+    <Attributes>
+        <Map>
+            <entry key="workflowName" value="Custom-Terminate Identity"/>
+        </Map>
+    </Attributes>
+    </QuickLink>
+
+
+    <!-- Quicklink Reactivate Identity -->
+    <QuickLink action="workflow" category="Manage" messageKey="Reactivate Identity" name="Custom-ReactivateIdentity" ordering="99">
+    <Attributes>
+        <Map>
+            <entry key="workflowName" value="Custom-Reactivate Identity"/>
+        </Map>
+    </Attributes>
+    </QuickLink>
+
+</sailpoint>
