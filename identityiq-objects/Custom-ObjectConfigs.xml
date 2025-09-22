@@ -259,6 +259,7 @@
                 </value>
             </entry>
             <entry key="createIdentityForm" value="Custom-Create Identity"/>
+            <entry key="updateIdentityForm" value="Custom-Update Identity"/>
         </Map>
         </Attributes>
     </Configuration>
