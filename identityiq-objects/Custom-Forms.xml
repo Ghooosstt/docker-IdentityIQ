@@ -313,7 +313,6 @@
             <Field displayName="End Date" name="endDate" type="date"/>
             <Field displayName="Manager" filterString="workgroup == false &amp;&amp; inactive == false" name="manager" required="true" type="sailpoint.object.Identity"/>
             <Field displayName="Phone Number" name="phoneNumber" type="string"/>
-            <Field displayName="Secret Number" name="secretNumber" type="string"/>
             <Field displayName="Type" name="type" required="true" type="string">
                 <AllowedValuesDefinition>
                     <Value>
