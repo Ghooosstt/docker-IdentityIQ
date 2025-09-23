@@ -111,8 +111,10 @@
                     {
                         switch(country) {
                             case "Switzerland":
-                                allowedValues.add("Lausanne");
                                 allowedValues.add("Genève");
+                                allowedValues.add("Lausanne");
+                                allowedValues.add("Bern");
+                                allowedValues.add("Zürich");
                                 break;
                             case "Germany":
                                 allowedValues.add("Berlin");
@@ -252,8 +254,10 @@
                     {
                         switch(country) {
                             case "Switzerland":
-                                allowedValues.add("Lausanne");
                                 allowedValues.add("Genève");
+                                allowedValues.add("Lausanne");
+                                allowedValues.add("Bern");
+                                allowedValues.add("Zürich");
                                 break;
                             case "Germany":
                                 allowedValues.add("Berlin");
