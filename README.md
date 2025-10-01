@@ -23,7 +23,7 @@ To use this project, you must:
 
 - You can also deploy a custom war file by dropping your **identityiq.war** file and following these conditions:
     1. File name must be 'identityiq.war'.
-    1. `iiq.properties` of your custom war must be configured on **localhost** with **identityiq** and **identityiqPlugin** users.
+    1. The `iiq.properties` file in your custom war should be the default version included in the original IdentityIQ zip file (with the MySQL configuration).
 
 2. Edit the **.env** file:
     1. Update the **IIQ_VERSION** variable by the version you are using *(Example: 8.2 for identityiq-8.2.zip)*.
