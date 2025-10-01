@@ -151,7 +151,7 @@
   <Attributes>
       <Map>
       <entry key="LDAPApplicationVersion" value="2.0"/>
-      <entry key="afterProvisioningRule"/>
+      <entry key="afterProvisioningRule" value="Custom-Rule-MoveLDAPAccount"/>
       <entry key="authSearchAttributes">
           <value>
           <List>
@@ -340,14 +340,6 @@
           </Map>
         </Attributes>
         <Section>
-          <Field displayName="con_prov_policy_ldap_user_DN" helpKey="help_con_prov_policy_ldap_user_DN" name="dn" required="true" type="string">
-            <Script>
-              <Source><![CDATA[
-                return "uid=" + identity.getFirstname() + "." + identity.getLastname() + ",ou=People,dc=my-company,dc=com";
-                ]]>
-              </Source>
-            </Script>
-          </Field>
           <Field displayName="con_prov_policy_ldap_full_name" helpKey="help_con_prov_policy_ldap_full_name" name="cn" required="true" type="string">
             <Script>
               <Source><![CDATA[
@@ -367,14 +359,6 @@
             <Script>
               <Source><![CDATA[
                 return identity.getLastname();
-                ]]>
-              </Source>
-            </Script>
-          </Field>
-          <Field displayName="uid" name="uid" required="true" type="string">
-            <Script>
-              <Source><![CDATA[
-                return identity.getFirstname() + "." + identity.getLastname();
                 ]]>
               </Source>
             </Script>

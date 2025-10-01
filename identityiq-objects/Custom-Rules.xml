@@ -194,6 +194,10 @@
     import sailpoint.object.Profile;
     import sailpoint.object.Application;
     import sailpoint.object.Identity;
+    import org.apache.log4j.Logger;
+
+    Logger log = Logger.getLogger("custom.rule.CreateRoleModel");
+    log.debug("Starting CreateRoleModel");
 
     Application openLDAP = context.getObjectByName(Application.class, "OpenLDAP");
     Identity spadmin = context.getObjectByName(Identity.class, "spadmin");
@@ -272,6 +276,112 @@
     }
 
     context.commitTransaction();
+    ]]></Source>
+    </Rule>
+
+    <!-- Rule Move LDAP Account -->
+    <Rule language="beanshell" name="Custom-Rule-MoveLDAPAccount" type="AfterProvisioning">
+    <Description>An IdentityIQ server-side rule that is executed after the connector's provisioning method is called. This gives the customer the ability to customize or react to anything in the ProvisioningPlan AFTER it has been sent out to the specific applications.
+
+    This rule will be called for any application found in a plan that also has a configured 'afterProvisioningRule' configured.</Description>
+    <Signature>
+        <Inputs>
+        <Argument name="log" type="org.apache.commons.logging.Log">
+            <Description>
+            The log object associated with the SailPointContext.
+            </Description>
+        </Argument>
+        <Argument name="context" type="sailpoint.api.SailPointContext">
+            <Description>
+            A sailpoint.api.SailPointContext object that can be used to query the database if necessary.
+            </Description>
+        </Argument>
+        <Argument name="plan">
+            <Description>
+            The ProvisioningPlan object on its way to the Connector.
+            </Description>
+        </Argument>
+        <Argument name="application">
+            <Description>
+            The application object that references this before/after script.
+            </Description>
+        </Argument>
+        <Argument name="result">
+            <Description>
+            The ProvisioningResult object returned by the connectors provision method. This can be null and in many cases the connector will  not return a result and instead will annotate the plan's ProvisioningResult either at the plan or account level.
+            </Description>
+        </Argument>
+        </Inputs>
+    </Signature>
+    <Source><![CDATA[
+        import sailpoint.object.Identity;
+        import sailpoint.object.Application;
+        import sailpoint.object.ProvisioningPlan;
+        import sailpoint.object.ProvisioningPlan.AccountRequest;
+        import sailpoint.object.ProvisioningPlan.AttributeRequest;
+        import javax.naming.Context;
+        import javax.naming.NamingException;
+        import javax.naming.directory.DirContext;
+        import javax.naming.directory.InitialDirContext;
+        import java.util.Hashtable;
+        import org.apache.log4j.Logger;
+
+        /*
+        * This rule move the account if the identity changed firstname or lastname
+        * We use a DirContext because IIQ does not support LDAP account move natively
+        * A reagregation is needed to see the new DN of the account
+        */
+
+        Logger log = Logger.getLogger("custom.rule.MoveLDAPAccount");
+        log.debug("Rule triggered");
+
+        List accountRequests = plan.getAccountRequests();
+        if (accountRequests != null)
+        {
+            for (AccountRequest accountRequest: accountRequests)
+            {
+                AccountRequest.Operation op = accountRequest.getOperation();
+                if(op == null)
+                {
+                    continue;
+                }
+
+                if(op.equals(AccountRequest.Operation.Modify))
+                {
+                    log.debug("Modify operation detected");
+                    AttributeRequest givenNameAttrReq = accountRequest.getAttributeRequest("givenName");
+                    AttributeRequest snAttrReq = accountRequest.getAttributeRequest("sn");
+                    if(givenNameAttrReq != null || snAttrReq != null)
+                    {
+                        // Identity changed firstname or lastname
+                        String nativeIdentity = accountRequest.getNativeIdentity();
+                        Identity identity = plan.getIdentity();
+                        log.debug("Name changed for " + identity.getName());
+
+                        // Calculating new DN
+                        String newDN = "uid=" + identity.getFirstname() + "." + identity.getLastname() + ",ou=People,dc=my-company,dc=com";
+
+                        // Connecting to LDAP to move the account
+                        Application openLDAP = context.getObjectByName(Application.class, "OpenLDAP");
+                        Hashtable env = new Hashtable();
+                        env.put(Context.INITIAL_CONTEXT_FACTORY, "com.sun.jndi.ldap.LdapCtxFactory");
+                        env.put(Context.PROVIDER_URL, "ldap://" + openLDAP.getAttributeValue("host") + ":389");
+                        env.put(Context.SECURITY_PRINCIPAL, openLDAP.getAttributeValue("user"));
+                        env.put(Context.SECURITY_CREDENTIALS, context.decrypt(openLDAP.getAttributeValue("password")));
+                        log.debug(env);
+
+                        try {
+                            DirContext ctx = new InitialDirContext(env);
+                            // Move entry from old DN to new DN
+                            ctx.rename(nativeIdentity, newDN);
+                            ctx.close();
+                        } catch (NamingException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }
+        }
     ]]></Source>
     </Rule>
 

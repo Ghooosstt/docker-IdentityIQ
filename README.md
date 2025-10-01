@@ -87,6 +87,36 @@ To remove the containers, use the command `docker-compose down`.
 
 To recreate the containers, use the command `docker-compose up`.
 
+## Update HR file
+
+To update the HR file, you must connect to the **iiq-tomcat** container.
+
+`docker exec -it iiq-tomcat bash`
+
+Then edit the HR CSV file.
+
+`vim /work/HR-file.csv`
+
+Once edited, run the *Custom-TaskDefinition-Full* task in IdentityIQ to get the update and refresh the identities.
+
+## Log your code
+
+The container initialization add a custom logger in the log4j2.properties file.
+
+To log, your logger must start by **custom.**
+
+The logs are written to the file `/work/sailpoint.log` in the **iiq-tomcat** container.
+
+````
+// Example
+// If your logger does not start with custom, you will not receive any log
+
+import org.apache.log4j.Logger;
+
+Logger log = Logger.getLogger("custom.rule.MoveLDAPAccount");
+log.debug("Rule triggered");
+````
+
 ## Reset the environment
 
 If you want to deploy another IdentityIQ version, another patch version, or another custom war, you must:
