@@ -20,16 +20,16 @@ if [ ! -e $CONTAINER_ALREADY_STARTED ]; then
 
     # Add custom logger in the log4j2.properties file
     echo '#Automatically added by the docker entrypoint.sh file' >>  /usr/local/tomcat/webapps/identityiq/WEB-INF/classes/log4j2.properties
-    echo 'appender.file.type=File' >>  /usr/local/tomcat/webapps/identityiq/WEB-INF/classes/log4j2.properties
-    echo 'appender.file.name=file' >>  /usr/local/tomcat/webapps/identityiq/WEB-INF/classes/log4j2.properties
-    echo 'appender.file.fileName=/work/sailpoint.log' >>  /usr/local/tomcat/webapps/identityiq/WEB-INF/classes/log4j2.properties
-    echo 'appender.file.layout.type=PatternLayout' >>  /usr/local/tomcat/webapps/identityiq/WEB-INF/classes/log4j2.properties
-    echo 'appender.file.layout.pattern=%d{ISO8601} %5p %t %c{4}:%L - %m%n' >>  /usr/local/tomcat/webapps/identityiq/WEB-INF/classes/log4j2.properties
-    echo 'rootLogger.appenderRef.file.ref=file' >>  /usr/local/tomcat/webapps/identityiq/WEB-INF/classes/log4j2.properties
+    echo 'appender.sailpointlogfile.type=File' >>  /usr/local/tomcat/webapps/identityiq/WEB-INF/classes/log4j2.properties
+    echo 'appender.sailpointlogfile.name=sailpointLogFile' >>  /usr/local/tomcat/webapps/identityiq/WEB-INF/classes/log4j2.properties
+    echo 'appender.sailpointlogfile.fileName=/work/sailpoint.log' >>  /usr/local/tomcat/webapps/identityiq/WEB-INF/classes/log4j2.properties
+    echo 'appender.sailpointlogfile.layout.type=PatternLayout' >>  /usr/local/tomcat/webapps/identityiq/WEB-INF/classes/log4j2.properties
+    echo 'appender.sailpointlogfile.layout.pattern=%d{ISO8601} %5p %t %c{4}:%L - %m%n' >>  /usr/local/tomcat/webapps/identityiq/WEB-INF/classes/log4j2.properties
+    echo 'rootLogger.appenderRef.sailpointlogfile.ref=sailpointLogFile' >>  /usr/local/tomcat/webapps/identityiq/WEB-INF/classes/log4j2.properties
     echo '' >>  /usr/local/tomcat/webapps/identityiq/WEB-INF/classes/log4j2.properties
     echo 'logger.custom.name=custom' >>  /usr/local/tomcat/webapps/identityiq/WEB-INF/classes/log4j2.properties
     echo 'logger.custom.level=debug' >>  /usr/local/tomcat/webapps/identityiq/WEB-INF/classes/log4j2.properties
-    echo 'logger.sailpoint.appenderRef.syslog.ref=file' >>  /usr/local/tomcat/webapps/identityiq/WEB-INF/classes/log4j2.properties
+    echo 'logger.sailpoint.appenderRef.syslog.ref=sailpointLogFile' >>  /usr/local/tomcat/webapps/identityiq/WEB-INF/classes/log4j2.properties
 
     # Update init file with mailslurper smtp server. In a custom war, the default smtp config is in 'init-default_org.xml' file, and for default package smtp config is in 'init.xml' file.
     if [ "$IIQ_CUSTOM_WAR" = "yes" ]; then sed -i 's/mail.example.com/iiq-mailslurper/g' /usr/local/tomcat/webapps/identityiq/WEB-INF/config/init-default_org.xml; else sed -i 's/mail.example.com/iiq-mailslurper/g' /usr/local/tomcat/webapps/identityiq/WEB-INF/config/init.xml; fi
