@@ -23,6 +23,7 @@ services:
         IIQ_VERSION: ${IIQ_VERSION}
         IIQ_PATCH: ${IIQ_PATCH}
         IIQ_CUSTOM_WAR: ${IIQ_CUSTOM_WAR}
+        IIQ_CUSTOM_KEYSTORE: ${IIQ_CUSTOM_KEYSTORE}
       dockerfile: ./docker/tomcat/Dockerfile
     image: docker-identityiq-tomcat
     container_name: iiq-tomcat

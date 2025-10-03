@@ -2,9 +2,11 @@ FROM tomcat:9.0-jdk11
 ARG IIQ_VERSION
 ARG IIQ_PATCH
 ARG IIQ_CUSTOM_WAR
+ARG IIQ_CUSTOM_KEYSTORE
 ENV IIQ_VERSION=${IIQ_VERSION}
 ENV IIQ_PATCH=${IIQ_PATCH}
 ENV IIQ_CUSTOM_WAR=${IIQ_CUSTOM_WAR}
+ENV IIQ_CUSTOM_KEYSTORE=${IIQ_CUSTOM_KEYSTORE}
 
 # Fix tomcat 404 not found : https://github.com/docker-library/tomcat/issues/184
 WORKDIR /usr/local/tomcat/
@@ -22,7 +24,7 @@ RUN apt-get clean && apt-get autoclean && apt-get update
 RUN apt-get install -y unzip
 
 # Get identityiq-<version>.zip / identityiq<version><patch>.jar (if exists) / identityiq.war (if exists) from host and copy them into the image.
-COPY identityiq-${IIQ_VERSION}.zi* identityiq-${IIQ_VERSION}${IIQ_PATCH}.ja* identityiq.wa* ./
+COPY identityiq-${IIQ_VERSION}.zi* identityiq-${IIQ_VERSION}${IIQ_PATCH}.ja* identityiq.wa* iiq.* ./
 
 # Get Custom IIQ objects from host in the 'identityiq-objects' folder and copy them into the image.
 COPY identityiq-objects/Custom-Applications.xml ./
@@ -45,6 +47,9 @@ RUN rm /usr/local/tomcat/webapps/identityiq.war
 
 # Unzip the patch in webapps tomcat directory if there is no custom war and if the IIQ_PATCH variable environment is set.
 RUN if [ "$IIQ_CUSTOM_WAR" != "yes" ] && [ ! -z "$IIQ_PATCH" ]; then unzip -o identityiq-${IIQ_VERSION}${IIQ_PATCH}.jar -d /usr/local/tomcat/webapps/identityiq; fi
+
+# Use custom keystore if option is enabled
+RUN if [ "$IIQ_CUSTOM_KEYSTORE" = "yes" ]; then mv iiq.cfg iiq.dat /usr/local/tomcat/webapps/identityiq/WEB-INF/classes/; fi
 
 # Copy container startup script.
 WORKDIR /usr/local/tomcat/

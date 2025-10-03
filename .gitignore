@@ -3,3 +3,5 @@
 *.zip
 *.war
 .env
+iiq.cfg
+iiq.dat

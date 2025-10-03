@@ -19,7 +19,7 @@ To use this project, you must:
 
 ## Setup
 
-1. - Drop your **identityiq-\<version\>.zip** file, and your **identityiq\<version\>\<patch\>.jar** file in the root of this directory.
+1. - Place your **identityiq-\<version\>.zip** file, and your **identityiq\<version\>\<patch\>.jar** file in the root of this directory.
 
 - You can also deploy a custom war file by dropping your **identityiq.war** file and following these conditions:
     1. File name must be 'identityiq.war'.
@@ -29,6 +29,7 @@ To use this project, you must:
     1. Update the **IIQ_VERSION** variable by the version you are using *(Example: 8.2 for identityiq-8.2.zip)*.
     1. Specify a patch with **IIQ_PATCH** *(Example: p1 for identityiq-8.2p1.jar, nothing for no patch)*.
     1. Change the **IIQ_CUSTOM_WAR** variable to `yes` if you are deploying a custom war, `no` otherwise.
+    1. Change the **IIQ_CUSTOM_KEYSTORE** variable to `yes` if you want to use a custom keystore. The *iiq.cfg* and *iiq.dat* files must be located at the root of this directory and will be deployed to the */identityiq/WEB-INF/classes/* directory.
 
 3. Go to the root of this directory and run `docker-compose up`. This command will build the **docker-identityiq_tomcat** image and create all the containers.
 
