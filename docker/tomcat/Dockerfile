@@ -20,7 +20,7 @@ COPY docker/tomcat/context.xml ./webapps/host-manager/META-INF/context.xml
 
 WORKDIR /work
 # Install unzip tool
-RUN apt-get clean && apt-get autoclean && apt-get update
+RUN apt-get update && apt-get upgrade -y && apt-get clean && apt-get autoclean
 RUN apt-get install -y unzip
 
 # Get identityiq-<version>.zip / identityiq<version><patch>.jar (if exists) / identityiq.war (if exists) from host and copy them into the image.
